@@ -51,4 +51,5 @@ target/
 *.iml
 rebel.xml
 .idea/
-.idea
+front.js
+0.css
