@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.unimedsci.ydata.jxz.commons.dao.LastTendencyMapper">
+    <resultMap id="BaseResultMap" type="com.unimedsci.ydata.jxz.commons.datas.LastTendency">
+        <!--
+          WARNING - @mbggenerated
+          Generated on 2017-11-30 15:36:04.
+        -->
+        <id column="last_tendency_id" jdbcType="INTEGER" property="lastTendencyId"/>
+        <result column="last_tendency_title" jdbcType="VARCHAR" property="lastTendencyTitle"/>
+        <result column="main_img_name" jdbcType="VARCHAR" property="mainImgName"/>
+        <result column="publish_day" jdbcType="DATE" property="publishDay"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime"/>
+        <result column="status" jdbcType="VARCHAR" property="status"/>
+    </resultMap>
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs"
+               type="com.unimedsci.ydata.jxz.commons.datas.LastTendency">
+        <!--
+          WARNING - @mbggenerated
+          Generated on 2017-11-30 15:36:04.
+        -->
+        <result column="html_text" jdbcType="LONGVARCHAR" property="htmlText"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--
+          WARNING - @mbggenerated
+          Generated on 2017-11-30 15:36:04.
+        -->
+        last_tendency_id, last_tendency_title, main_img_name, publish_day, create_time, modify_time,
+        status
+    </sql>
+    <sql id="Blob_Column_List">
+        <!--
+          WARNING - @mbggenerated
+          Generated on 2017-11-30 15:36:04.
+        -->
+        html_text
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+        <!--
+          WARNING - @mbggenerated
+          Generated on 2017-11-30 15:36:04.
+        -->
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from last_tendency
+        where last_tendency_id = #{lastTendencyId,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        <!--
+          WARNING - @mbggenerated
+          Generated on 2017-11-30 15:36:04.
+        -->
+        delete from last_tendency
+        where last_tendency_id = #{lastTendencyId,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.unimedsci.ydata.jxz.commons.datas.LastTendency" useGeneratedKeys="true"
+            keyProperty="lastTendencyId">
+        insert into last_tendency ( last_tendency_title,
+        main_img_name, publish_day, create_time,
+        modify_time, status, html_text
+        )
+        values ( #{lastTendencyTitle,jdbcType=VARCHAR},
+        #{mainImgName,jdbcType=VARCHAR}, #{publishDay,jdbcType=DATE}, sysdate(),
+        #{modifyTime,jdbcType=TIMESTAMP}, #{status,jdbcType=VARCHAR}, #{htmlText,jdbcType=LONGVARCHAR}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="com.unimedsci.ydata.jxz.commons.datas.LastTendency">
+        <!--
+          WARNING - @mbggenerated
+          Generated on 2017-11-30 15:36:04.
+        -->
+        insert into last_tendency
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="lastTendencyId != null">
+                last_tendency_id,
+            </if>
+            <if test="lastTendencyTitle != null">
+                last_tendency_title,
+            </if>
+            <if test="mainImgName != null">
+                main_img_name,
+            </if>
+            <if test="publishDay != null">
+                publish_day,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="modifyTime != null">
+                modify_time,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="htmlText != null">
+                html_text,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="lastTendencyId != null">
+                #{lastTendencyId,jdbcType=INTEGER},
+            </if>
+            <if test="lastTendencyTitle != null">
+                #{lastTendencyTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="mainImgName != null">
+                #{mainImgName,jdbcType=VARCHAR},
+            </if>
+            <if test="publishDay != null">
+                #{publishDay,jdbcType=DATE},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="modifyTime != null">
+                #{modifyTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="htmlText != null">
+                #{htmlText,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.unimedsci.ydata.jxz.commons.datas.LastTendency">
+        <!--
+          WARNING - @mbggenerated
+          Generated on 2017-11-30 15:36:04.
+        -->
+        update last_tendency
+        <set>
+            <if test="lastTendencyTitle != null">
+                last_tendency_title = #{lastTendencyTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="mainImgName != null">
+                main_img_name = #{mainImgName,jdbcType=VARCHAR},
+            </if>
+            <if test="publishDay != null">
+                publish_day = #{publishDay,jdbcType=DATE},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="modifyTime != null">
+                modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="htmlText != null">
+                html_text = #{htmlText,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where last_tendency_id = #{lastTendencyId,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.unimedsci.ydata.jxz.commons.datas.LastTendency">
+        <!--
+          WARNING - @mbggenerated
+          Generated on 2017-11-30 15:36:04.
+        -->
+        update last_tendency
+        set last_tendency_title = #{lastTendencyTitle,jdbcType=VARCHAR},
+        main_img_name = #{mainImgName,jdbcType=VARCHAR},
+        publish_day = #{publishDay,jdbcType=DATE},
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+        modify_time = sysdate(),
+        status = #{status,jdbcType=VARCHAR},
+        html_text = #{htmlText,jdbcType=LONGVARCHAR}
+        where last_tendency_id = #{lastTendencyId,jdbcType=INTEGER}
+    </update>
+
+
+    <select id="queryLastTendencyList" parameterType="java.lang.String"
+            resultType="com.unimedsci.ydata.jxz.commons.datas.LastTendency">
+        select
+        *
+        from last_tendency a
+        where a.`status` = 'ACTIVE'
+        <if test="lastTendencyTitle != null and lastTendencyTitle != ''">
+            and a.last_tendency_title like concat ('%',#{lastTendencyTitle},'%')
+        </if>
+        <if test="lastTendencyId != null">
+            and a.last_tendency_id = #{lastTendencyId}
+        </if>
+        order by
+        a.create_time desc
+    </select>
+</mapper>

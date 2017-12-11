@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.unimedsci.ydata.jxz.commons.dao.CarrouselImgMapper">
+  <resultMap id="BaseResultMap" type="com.unimedsci.ydata.jxz.commons.datas.CarrouselImg">
+
+    <id column="carrousel_img_id" jdbcType="INTEGER" property="carrouselImgId" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="main_img_name" jdbcType="VARCHAR" property="mainImgName" />
+    <result column="item" jdbcType="INTEGER" property="item" />
+    <result column="uri" jdbcType="VARCHAR" property="uri" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    carrousel_img_id, description, main_img_name, item, uri, `status`, create_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from carrousel_img
+    where carrousel_img_id = #{carrouselImgId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from carrousel_img
+    where carrousel_img_id = #{carrouselImgId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.unimedsci.ydata.jxz.commons.datas.CarrouselImg" useGeneratedKeys="true" keyProperty="carrouselImgId">
+
+    insert into carrousel_img (description, main_img_name,
+      item, uri, `status`,
+      create_time)
+    values (#{description,jdbcType=VARCHAR}, #{mainImgName,jdbcType=VARCHAR},
+      #{item,jdbcType=INTEGER}, #{uri,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR},
+      sysdate())
+  </insert>
+  <insert id="insertSelective" parameterType="com.unimedsci.ydata.jxz.commons.datas.CarrouselImg">
+    <!--
+      WARNING - @mbggenerated
+      Generated on 2017-11-30 15:36:03.
+    -->
+    insert into carrousel_img
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="carrouselImgId != null">
+        carrousel_img_id,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="mainImgName != null">
+        main_img_name,
+      </if>
+      <if test="order != null">
+        order,
+      </if>
+      <if test="uri != null">
+        uri,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="carrouselImgId != null">
+        #{carrouselImgId,jdbcType=INTEGER},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="mainImgName != null">
+        #{mainImgName,jdbcType=VARCHAR},
+      </if>
+      <if test="order != null">
+        #{order,jdbcType=INTEGER},
+      </if>
+      <if test="uri != null">
+        #{uri,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.unimedsci.ydata.jxz.commons.datas.CarrouselImg">
+    <!--
+      WARNING - @mbggenerated
+      Generated on 2017-11-30 15:36:03.
+    -->
+    update carrousel_img
+    <set>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="mainImgName != null">
+        main_img_name = #{mainImgName,jdbcType=VARCHAR},
+      </if>
+      <if test="order != null">
+        order = #{order,jdbcType=INTEGER},
+      </if>
+      <if test="uri != null">
+        uri = #{uri,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where carrousel_img_id = #{carrouselImgId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.unimedsci.ydata.jxz.commons.datas.CarrouselImg">
+    <!--
+      WARNING - @mbggenerated
+      Generated on 2017-11-30 15:36:03.
+    -->
+    update carrousel_img
+    set description = #{description,jdbcType=VARCHAR},
+      main_img_name = #{mainImgName,jdbcType=VARCHAR},
+      item = #{item,jdbcType=INTEGER},
+      uri = #{uri,jdbcType=VARCHAR},
+      `status` = #{status,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where carrousel_img_id = #{carrouselImgId,jdbcType=INTEGER}
+  </update>
+
+  <select id="queryCarrouseImgByOrderId" parameterType="java.lang.Integer" resultType="com.unimedsci.ydata.jxz.commons.datas.CarrouselImg">
+
+    select
+    *
+    from carrousel_img a
+    where a.item = #{orderId} and a.status != 'INACTIVE'
+  </select>
+
+  <select id="queryCarrouselImgsList" parameterType="java.util.Map" resultType="com.unimedsci.ydata.jxz.commons.datas.CarrouselImg">
+
+    select
+        *
+    from carrousel_img a
+    where  a.`status` != 'INACTIVE'
+    <if test="carrouselImgId != null">
+      and a.carrousel_img_id = #{carrouselImgId}
+    </if>
+  </select>
+
+
+
+</mapper>

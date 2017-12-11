@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>jxc</artifactId>
+        <groupId>com.unimedsci.ydata</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>deploys</artifactId>
+    <version>${global.version}</version>
+    <name>jxc-deploys</name>
+    <packaging>pom</packaging>
+    <groupId>com.unimedsci.ydata.jxc</groupId>
+    <url>http://maven.apache.org</url>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.unimedsci.ydata.jxc</groupId>
+            <artifactId>jxc-portal</artifactId>
+            <version>${global.version}</version>
+        </dependency>
+    </dependencies>
+  <modules>
+    <module>portal</module>
+      <module>management</module>
+      <module>manager</module>
+  </modules>
+</project>

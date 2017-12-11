@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.unimedsci.ydata.jxz.commons.dao.ResearchSiteMapper">
+  <resultMap id="BaseResultMap" type="com.unimedsci.ydata.jxz.commons.datas.ResearchSite">
+    <!--
+      WARNING - @mbggenerated
+      Generated on 2017-11-30 15:36:04.
+    -->
+    <id column="reseach_site_id" jdbcType="INTEGER" property="reseachSiteId" />
+    <result column="reseach_subject_id" jdbcType="INTEGER" property="reseachSubjectId" />
+    <result column="hospital" jdbcType="VARCHAR" property="hospital" />
+    <result column="department" jdbcType="VARCHAR" property="department" />
+    <result column="main_researcher" jdbcType="VARCHAR" property="mainResearcher" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbggenerated
+      Generated on 2017-11-30 15:36:04.
+    -->
+    reseach_site_id, reseach_subject_id, hospital, department, main_researcher, status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <!--
+      WARNING - @mbggenerated
+      Generated on 2017-11-30 15:36:04.
+    -->
+    select 
+    <include refid="Base_Column_List" />
+    from research_site
+    where reseach_site_id = #{reseachSiteId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <!--
+      WARNING - @mbggenerated
+      Generated on 2017-11-30 15:36:04.
+    -->
+    delete from research_site
+    where reseach_site_id = #{reseachSiteId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.unimedsci.ydata.jxz.commons.datas.ResearchSite">
+    <!--
+      WARNING - @mbggenerated
+      Generated on 2017-11-30 15:36:04.
+    -->
+    insert into research_site (reseach_site_id, reseach_subject_id, 
+      hospital, department, main_researcher, 
+      status)
+    values (#{reseachSiteId,jdbcType=INTEGER}, #{reseachSubjectId,jdbcType=INTEGER}, 
+      #{hospital,jdbcType=VARCHAR}, #{department,jdbcType=VARCHAR}, #{mainResearcher,jdbcType=VARCHAR}, 
+      #{status,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.unimedsci.ydata.jxz.commons.datas.ResearchSite">
+    <!--
+      WARNING - @mbggenerated
+      Generated on 2017-11-30 15:36:04.
+    -->
+    insert into research_site
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="reseachSiteId != null">
+        reseach_site_id,
+      </if>
+      <if test="reseachSubjectId != null">
+        reseach_subject_id,
+      </if>
+      <if test="hospital != null">
+        hospital,
+      </if>
+      <if test="department != null">
+        department,
+      </if>
+      <if test="mainResearcher != null">
+        main_researcher,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="reseachSiteId != null">
+        #{reseachSiteId,jdbcType=INTEGER},
+      </if>
+      <if test="reseachSubjectId != null">
+        #{reseachSubjectId,jdbcType=INTEGER},
+      </if>
+      <if test="hospital != null">
+        #{hospital,jdbcType=VARCHAR},
+      </if>
+      <if test="department != null">
+        #{department,jdbcType=VARCHAR},
+      </if>
+      <if test="mainResearcher != null">
+        #{mainResearcher,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.unimedsci.ydata.jxz.commons.datas.ResearchSite">
+    <!--
+      WARNING - @mbggenerated
+      Generated on 2017-11-30 15:36:04.
+    -->
+    update research_site
+    <set>
+      <if test="reseachSubjectId != null">
+        reseach_subject_id = #{reseachSubjectId,jdbcType=INTEGER},
+      </if>
+      <if test="hospital != null">
+        hospital = #{hospital,jdbcType=VARCHAR},
+      </if>
+      <if test="department != null">
+        department = #{department,jdbcType=VARCHAR},
+      </if>
+      <if test="mainResearcher != null">
+        main_researcher = #{mainResearcher,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where reseach_site_id = #{reseachSiteId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.unimedsci.ydata.jxz.commons.datas.ResearchSite">
+    <!--
+      WARNING - @mbggenerated
+      Generated on 2017-11-30 15:36:04.
+    -->
+    update research_site
+    set reseach_subject_id = #{reseachSubjectId,jdbcType=INTEGER},
+      hospital = #{hospital,jdbcType=VARCHAR},
+      department = #{department,jdbcType=VARCHAR},
+      main_researcher = #{mainResearcher,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR}
+    where reseach_site_id = #{reseachSiteId,jdbcType=INTEGER}
+  </update>
+</mapper>

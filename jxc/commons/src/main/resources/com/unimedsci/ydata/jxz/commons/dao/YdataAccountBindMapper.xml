@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.unimedsci.ydata.jxz.commons.dao.YdataAccountBindMapper">
+    <resultMap id="BaseResultMap" type="com.unimedsci.ydata.jxz.commons.datas.YdataAccountBind">
+        <id column="ydata_account_bind_id" jdbcType="INTEGER" property="ydataAccountBindId"/>
+        <result column="ydata_account_id" jdbcType="INTEGER" property="ydataAccountId"/>
+        <result column="open_id" jdbcType="VARCHAR" property="openId"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime"/>
+        <result column="status" jdbcType="VARCHAR" property="status"/>
+        <result column="acct_type" jdbcType="VARCHAR" property="acctType"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    ydata_account_bind_id, ydata_account_id, open_id, create_time, modify_time, status, 
+    acct_type
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from ydata_account_bind
+        where ydata_account_bind_id = #{ydataAccountBindId,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from ydata_account_bind
+    where ydata_account_bind_id = #{ydataAccountBindId,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.unimedsci.ydata.jxz.commons.datas.YdataAccountBind">
+    insert into ydata_account_bind (ydata_account_bind_id, ydata_account_id,
+      open_id, create_time, modify_time, 
+      status, acct_type)
+    values (#{ydataAccountBindId,jdbcType=INTEGER}, #{ydataAccountId,jdbcType=INTEGER}, 
+      #{openId,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{modifyTime,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=VARCHAR}, #{acctType,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.unimedsci.ydata.jxz.commons.datas.YdataAccountBind">
+        insert into ydata_account_bind
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="ydataAccountBindId != null">
+                ydata_account_bind_id,
+            </if>
+            <if test="ydataAccountId != null">
+                ydata_account_id,
+            </if>
+            <if test="openId != null">
+                open_id,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="modifyTime != null">
+                modify_time,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="acctType != null">
+                acct_type,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="ydataAccountBindId != null">
+                #{ydataAccountBindId,jdbcType=INTEGER},
+            </if>
+            <if test="ydataAccountId != null">
+                #{ydataAccountId,jdbcType=INTEGER},
+            </if>
+            <if test="openId != null">
+                #{openId,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="modifyTime != null">
+                #{modifyTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="acctType != null">
+                #{acctType,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.unimedsci.ydata.jxz.commons.datas.YdataAccountBind">
+        update ydata_account_bind
+        <set>
+            <if test="ydataAccountId != null">
+                ydata_account_id = #{ydataAccountId,jdbcType=INTEGER},
+            </if>
+            <if test="openId != null">
+                open_id = #{openId,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="modifyTime != null">
+                modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="acctType != null">
+                acct_type = #{acctType,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where ydata_account_bind_id = #{ydataAccountBindId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.unimedsci.ydata.jxz.commons.datas.YdataAccountBind">
+    update ydata_account_bind
+    set ydata_account_id = #{ydataAccountId,jdbcType=INTEGER},
+      open_id = #{openId,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=VARCHAR},
+      acct_type = #{acctType,jdbcType=VARCHAR}
+    where ydata_account_bind_id = #{ydataAccountBindId,jdbcType=INTEGER}
+  </update>
+
+    <select id="selectByOpenidAndStatus" parameterType="Map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from ydata_account_bind
+        where open_id = #{openid}
+        <if test="status != null">
+            and status = #{status}
+        </if>
+    </select>
+    <update id="unbindByOpenidList" parameterType="List">
+        update ydata_account_bind
+        set status = 'INACTIVE',
+        modify_time = now()
+        where status = 'ACTIVE'
+        and open_id in
+        <foreach collection="list" index="index" item="item"
+                 open="(" separator="," close=")">#{item}
+        </foreach>
+
+    </update>
+    <update id="unbindByOpenid" parameterType="List">
+    update ydata_account_bind
+    set status = 'INACTIVE',
+    modify_time = now()
+    where status = 'ACTIVE'
+    and open_id = #{openid}
+
+  </update>
+
+
+    <select id="queryYdataAccountBind" parameterType="java.util.Map"
+            resultType="com.unimedsci.ydata.jxz.commons.datas.YdataAccountBind">
+        SELECT
+            a.*,b.ydata_uuid as ydata_uuid
+        FROM
+            ydata_account_bind a
+        LEFT JOIN ydata_account b on a.ydata_account_id = b.ydata_account_id
+        where 1=1
+        <if test="bindStatus != null and bindStatus != ''">
+            and a.`status` = #{bindStatus}
+        </if>
+    </select>
+
+    <select id="queryYdataAccountBindYdataSearch" parameterType="java.util.Map"
+            resultType="com.unimedsci.ydata.jxz.commons.datas.YdataAccountBind">
+        SELECT
+        a.*,b.ydata_uuid as ydata_uuid
+        FROM
+        ydata_account_bind a
+        LEFT JOIN ydata_account b on a.ydata_account_id = b.ydata_account_id
+        where 1=1
+        <if test="bindStatus != null and bindStatus != ''">
+            and a.`status` = #{bindStatus}
+        </if>
+        and b.ydata_uuid in
+        <foreach collection="userIds" item="item" index="index"
+                 open="(" separator="," close=")">#{item}</foreach>
+
+    </select>
+
+
+</mapper>

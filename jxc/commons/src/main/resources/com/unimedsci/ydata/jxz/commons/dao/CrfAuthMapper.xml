@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.unimedsci.ydata.jxz.commons.dao.CrfAuthMapper">
+  <resultMap id="BaseResultMap" type="com.unimedsci.ydata.jxz.commons.datas.CrfAuth">
+    <!--
+      WARNING - @mbggenerated
+      Generated on 2017-11-30 15:36:03.
+    -->
+    <id column="crf_auth_id" jdbcType="INTEGER" property="crfAuthId" />
+    <result column="visit_type_id" jdbcType="INTEGER" property="visitTypeId" />
+    <result column="module_id" jdbcType="INTEGER" property="moduleId" />
+    <result column="auth" jdbcType="VARCHAR" property="auth" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbggenerated
+      Generated on 2017-11-30 15:36:03.
+    -->
+    crf_auth_id, visit_type_id, module_id, auth
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <!--
+      WARNING - @mbggenerated
+      Generated on 2017-11-30 15:36:03.
+    -->
+    select 
+    <include refid="Base_Column_List" />
+    from crf_auth
+    where crf_auth_id = #{crfAuthId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <!--
+      WARNING - @mbggenerated
+      Generated on 2017-11-30 15:36:03.
+    -->
+    delete from crf_auth
+    where crf_auth_id = #{crfAuthId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.unimedsci.ydata.jxz.commons.datas.CrfAuth" useGeneratedKeys="true"
+          keyProperty="crfAuthId">
+    insert into crf_auth ( visit_type_id, module_id,
+      auth)
+    values ( #{visitTypeId,jdbcType=INTEGER}, #{moduleId,jdbcType=INTEGER},
+      #{auth,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.unimedsci.ydata.jxz.commons.datas.CrfAuth">
+    <!--
+      WARNING - @mbggenerated
+      Generated on 2017-11-30 15:36:03.
+    -->
+    insert into crf_auth
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="crfAuthId != null">
+        crf_auth_id,
+      </if>
+      <if test="visitTypeId != null">
+        visit_type_id,
+      </if>
+      <if test="moduleId != null">
+        module_id,
+      </if>
+      <if test="auth != null">
+        auth,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="crfAuthId != null">
+        #{crfAuthId,jdbcType=INTEGER},
+      </if>
+      <if test="visitTypeId != null">
+        #{visitTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="moduleId != null">
+        #{moduleId,jdbcType=INTEGER},
+      </if>
+      <if test="auth != null">
+        #{auth,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.unimedsci.ydata.jxz.commons.datas.CrfAuth">
+    <!--
+      WARNING - @mbggenerated
+      Generated on 2017-11-30 15:36:03.
+    -->
+    update crf_auth
+    <set>
+      <if test="visitTypeId != null">
+        visit_type_id = #{visitTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="moduleId != null">
+        module_id = #{moduleId,jdbcType=INTEGER},
+      </if>
+      <if test="auth != null">
+        auth = #{auth,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where crf_auth_id = #{crfAuthId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.unimedsci.ydata.jxz.commons.datas.CrfAuth">
+    <!--
+      WARNING - @mbggenerated
+      Generated on 2017-11-30 15:36:03.
+    -->
+    update crf_auth
+    set visit_type_id = #{visitTypeId,jdbcType=INTEGER},
+      module_id = #{moduleId,jdbcType=INTEGER},
+      auth = #{auth,jdbcType=VARCHAR}
+    where crf_auth_id = #{crfAuthId,jdbcType=INTEGER}
+  </update>
+</mapper>

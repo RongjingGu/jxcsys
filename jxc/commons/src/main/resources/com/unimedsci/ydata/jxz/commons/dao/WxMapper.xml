@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.unimedsci.ydata.jxz.commons.dao.WxMapper">
+  <resultMap id="BaseResultMap" type="com.unimedsci.ydata.jxz.commons.datas.WxBase">
+
+    <id column="open_id" jdbcType="VARCHAR" property="openId" />
+    <result column="last_access_time" jdbcType="TIMESTAMP" property="lastAccessTime" />
+    <result column="nickname" jdbcType="VARCHAR" property="nickname" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="subscribe_time" jdbcType="TIMESTAMP" property="subscribeTime" />
+    <result column="unsubscribe_time" jdbcType="TIMESTAMP" property="unsubscribeTime" />
+    <result column="union_id" jdbcType="VARCHAR" property="unionId" />
+    <result column="city" jdbcType="VARCHAR" property="city" />
+    <result column="country" jdbcType="VARCHAR" property="country" />
+    <result column="province" jdbcType="VARCHAR" property="province" />
+    <result column="headimgurl" jdbcType="VARCHAR" property="headimgurl" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    open_id, last_access_time, nickname, status, subscribe_time, unsubscribe_time, union_id,
+    city, country, province, headimgurl
+  </sql>
+
+  <select id="selectByOpenid" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from wx
+    where open_id = #{openId,jdbcType=VARCHAR}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from wx
+    where open_id = #{openId,jdbcType=VARCHAR}
+  </delete>
+
+  <insert id="insert" parameterType="com.unimedsci.ydata.jxz.commons.datas.WxBase">
+
+    insert into wx (open_id, last_access_time, nickname, 
+      status, subscribe_time, unsubscribe_time, 
+      union_id, city, country, 
+      province, headimgurl)
+    values (#{openId,jdbcType=VARCHAR}, #{lastAccessTime,jdbcType=TIMESTAMP}, #{nickname,jdbcType=VARCHAR}, 
+      #{status,jdbcType=VARCHAR}, #{subscribeTime,jdbcType=TIMESTAMP}, #{unsubscribeTime,jdbcType=TIMESTAMP}, 
+      #{unionId,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, #{country,jdbcType=VARCHAR}, 
+      #{province,jdbcType=VARCHAR}, #{headimgurl,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.unimedsci.ydata.jxz.commons.datas.WxBase">
+
+    insert into wx
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="openId != null">
+        open_id,
+      </if>
+      <if test="lastAccessTime != null">
+        last_access_time,
+      </if>
+      <if test="nickname != null">
+        nickname,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="subscribeTime != null">
+        subscribe_time,
+      </if>
+      <if test="unsubscribeTime != null">
+        unsubscribe_time,
+      </if>
+      <if test="unionId != null">
+        union_id,
+      </if>
+      <if test="city != null">
+        city,
+      </if>
+      <if test="country != null">
+        country,
+      </if>
+      <if test="province != null">
+        province,
+      </if>
+      <if test="headimgurl != null">
+        headimgurl,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="openId != null">
+        #{openId,jdbcType=VARCHAR},
+      </if>
+      <if test="lastAccessTime != null">
+        #{lastAccessTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="nickname != null">
+        #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="subscribeTime != null">
+        #{subscribeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="unsubscribeTime != null">
+        #{unsubscribeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="unionId != null">
+        #{unionId,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="country != null">
+        #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null">
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="headimgurl != null">
+        #{headimgurl,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.unimedsci.ydata.jxz.commons.datas.WxBase">
+
+    update wx
+    <set>
+      <if test="lastAccessTime != null">
+        last_access_time = #{lastAccessTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="nickname != null">
+        nickname = #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="subscribeTime != null">
+        subscribe_time = #{subscribeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="unsubscribeTime != null">
+        unsubscribe_time = #{unsubscribeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="unionId != null">
+        union_id = #{unionId,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="country != null">
+        country = #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null">
+        province = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="headimgurl != null">
+        headimgurl = #{headimgurl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where open_id = #{openId,jdbcType=VARCHAR}
+  </update>
+  <update id="update" parameterType="com.unimedsci.ydata.jxz.commons.datas.WxBase">
+
+    update wx
+    set last_access_time = #{lastAccessTime,jdbcType=TIMESTAMP},
+      nickname = #{nickname,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      subscribe_time = #{subscribeTime,jdbcType=TIMESTAMP},
+      unsubscribe_time = #{unsubscribeTime,jdbcType=TIMESTAMP},
+      union_id = #{unionId,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      country = #{country,jdbcType=VARCHAR},
+      province = #{province,jdbcType=VARCHAR},
+      headimgurl = #{headimgurl,jdbcType=VARCHAR}
+    where open_id = #{openId,jdbcType=VARCHAR}
+  </update>
+</mapper>

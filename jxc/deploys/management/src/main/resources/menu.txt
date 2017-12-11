@@ -1,0 +1,9 @@
+{
+    "button": [
+        {
+            "name": "重链测试",
+            "type": "view",
+            "url" : "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb04532ee10023e43&redirect_uri=http://4zfew9.natappfree.cc/oauth.do?url=http%3a%2f%2f4zfew9.natappfree.cc%2fsubscribe.do&bindUrl=http%3a%2f%2f4zfew9.natappfree.cc%2funsubscribe.do&response_type=code&scope=snsapi_userinfo&state=PDMS#wechat_redirect"
+        }
+    ]
+}
