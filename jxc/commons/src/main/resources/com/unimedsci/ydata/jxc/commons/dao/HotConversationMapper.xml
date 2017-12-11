@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.unimedsci.ydata.jxc.commons.dao.HotConversationMapper">
+  <resultMap id="BaseResultMap" type="com.unimedsci.ydata.jxc.commons.datas.HotConversation">
+    <!--
+      WARNING - @mbggenerated
+      Generated on 2017-11-30 15:36:03.
+    -->
+    <id column="hot_conversation_id" jdbcType="INTEGER" property="hotConversationId" />
+    <result column="conversation_id" jdbcType="INTEGER" property="conversationId" />
+    <result column="is_top" jdbcType="INTEGER" property="isTop" />
+    <result column="top_time" jdbcType="TIMESTAMP" property="topTime" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="hot_time" jdbcType="TIMESTAMP" property="hotTime" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbggenerated
+      Generated on 2017-11-30 15:36:03.
+    -->
+    hot_conversation_id, conversation_id, is_top, top_time, create_time, hot_time, status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <!--
+      WARNING - @mbggenerated
+      Generated on 2017-11-30 15:36:03.
+    -->
+    select 
+    <include refid="Base_Column_List" />
+    from hot_conversation
+    where hot_conversation_id = #{hotConversationId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <!--
+      WARNING - @mbggenerated
+      Generated on 2017-11-30 15:36:03.
+    -->
+    delete from hot_conversation
+    where hot_conversation_id = #{hotConversationId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.unimedsci.ydata.jxc.commons.datas.HotConversation">
+    <!--
+      WARNING - @mbggenerated
+      Generated on 2017-11-30 15:36:03.
+    -->
+    insert into hot_conversation (hot_conversation_id, conversation_id, 
+      is_top, top_time, create_time, 
+      hot_time, status)
+    values (#{hotConversationId,jdbcType=INTEGER}, #{conversationId,jdbcType=INTEGER}, 
+      #{isTop,jdbcType=INTEGER}, #{topTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{hotTime,jdbcType=TIMESTAMP}, #{status,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.unimedsci.ydata.jxc.commons.datas.HotConversation">
+    <!--
+      WARNING - @mbggenerated
+      Generated on 2017-11-30 15:36:03.
+    -->
+    insert into hot_conversation
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="hotConversationId != null">
+        hot_conversation_id,
+      </if>
+      <if test="conversationId != null">
+        conversation_id,
+      </if>
+      <if test="isTop != null">
+        is_top,
+      </if>
+      <if test="topTime != null">
+        top_time,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="hotTime != null">
+        hot_time,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="hotConversationId != null">
+        #{hotConversationId,jdbcType=INTEGER},
+      </if>
+      <if test="conversationId != null">
+        #{conversationId,jdbcType=INTEGER},
+      </if>
+      <if test="isTop != null">
+        #{isTop,jdbcType=INTEGER},
+      </if>
+      <if test="topTime != null">
+        #{topTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="hotTime != null">
+        #{hotTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.unimedsci.ydata.jxc.commons.datas.HotConversation">
+    <!--
+      WARNING - @mbggenerated
+      Generated on 2017-11-30 15:36:03.
+    -->
+    update hot_conversation
+    <set>
+      <if test="conversationId != null">
+        conversation_id = #{conversationId,jdbcType=INTEGER},
+      </if>
+      <if test="isTop != null">
+        is_top = #{isTop,jdbcType=INTEGER},
+      </if>
+      <if test="topTime != null">
+        top_time = #{topTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="hotTime != null">
+        hot_time = #{hotTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where hot_conversation_id = #{hotConversationId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.unimedsci.ydata.jxc.commons.datas.HotConversation">
+    <!--
+      WARNING - @mbggenerated
+      Generated on 2017-11-30 15:36:03.
+    -->
+    update hot_conversation
+    set conversation_id = #{conversationId,jdbcType=INTEGER},
+      is_top = #{isTop,jdbcType=INTEGER},
+      top_time = #{topTime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      hot_time = #{hotTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=VARCHAR}
+    where hot_conversation_id = #{hotConversationId,jdbcType=INTEGER}
+  </update>
+</mapper>

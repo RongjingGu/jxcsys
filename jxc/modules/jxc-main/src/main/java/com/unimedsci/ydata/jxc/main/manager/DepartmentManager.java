@@ -5,11 +5,11 @@ import com.alibaba.fastjson.JSONObject;
 import com.github.miemiedev.mybatis.paginator.domain.PageList;
 import com.sweetw.idata.commons.DataResult;
 import com.sweetw.idata.commons.exception.CustomException;
-import com.unimedsci.ydata.jxz.commons.datas.*;
-import com.unimedsci.ydata.jxz.commons.util.Page;
-import com.unimedsci.ydata.jxz.commons.util.SortDirection;
-import com.unimedsci.ydata.hdwx.pdmsInterface.PdmsService;
-import com.unimedsci.ydata.hdwx.settings.SettingsBean;
+import com.unimedsci.ydata.jxc.commons.datas.*;
+import com.unimedsci.ydata.jxc.commons.util.Page;
+import com.unimedsci.ydata.jxc.commons.util.SortDirection;
+import com.unimedsci.ydata.jxc.pdmsInterface.PdmsService;
+import com.unimedsci.ydata.jxc.settings.SettingsBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.unimedsci.ydata.jxc.commons.dao.PopularScienceMapper">
+  <resultMap id="BaseResultMap" type="com.unimedsci.ydata.jxc.commons.datas.PopularScience">
+    <id column="popular_science_id" jdbcType="INTEGER" property="popularScienceId" />
+    <result column="popular_science_title" jdbcType="VARCHAR" property="popularScienceTitle" />
+    <result column="main_img_name" jdbcType="VARCHAR" property="mainImgName" />
+    <result column="publish_time" jdbcType="DATE" property="publishTime" />
+    <result column="create_time" jdbcType="DATE" property="createTime" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="popular_science_category_id" jdbcType="INTEGER" property="popularScienceCategoryId" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.unimedsci.ydata.jxc.commons.datas.PopularScience">
+    <result column="html_text" jdbcType="LONGVARCHAR" property="htmlText" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    popular_science_id, popular_science_title, main_img_name, publish_time, popular_science_category_id,create_time,status
+  </sql>
+  <sql id="Blob_Column_List">
+    html_text
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from popular_science
+    where popular_science_id = #{popularScienceId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+
+    delete from popular_science
+    where popular_science_id = #{popularScienceId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.unimedsci.ydata.jxc.commons.datas.PopularScience" useGeneratedKeys="true" keyProperty="popularScienceId">
+
+    insert into popular_science (popular_science_title,
+      main_img_name, publish_time, popular_science_category_id, 
+      html_text,create_time,status)
+    values ( #{popularScienceTitle,jdbcType=VARCHAR},
+      #{mainImgName,jdbcType=VARCHAR}, #{publishTime,jdbcType=DATE}, #{popularScienceCategoryId,jdbcType=INTEGER}, 
+      #{htmlText,jdbcType=LONGVARCHAR},sysdate(),)
+  </insert>
+  <insert id="insertSelective" parameterType="com.unimedsci.ydata.jxc.commons.datas.PopularScience">
+
+    insert into popular_science
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="popularScienceId != null">
+        popular_science_id,
+      </if>
+      <if test="popularScienceTitle != null">
+        popular_science_title,
+      </if>
+      <if test="mainImgName != null">
+        main_img_name,
+      </if>
+      <if test="publishTime != null">
+        publish_time,
+      </if>
+      <if test="popularScienceCategoryId != null">
+        popular_science_category_id,
+      </if>
+      <if test="htmlText != null">
+        html_text,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="popularScienceId != null">
+        #{popularScienceId,jdbcType=INTEGER},
+      </if>
+      <if test="popularScienceTitle != null">
+        #{popularScienceTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="mainImgName != null">
+        #{mainImgName,jdbcType=VARCHAR},
+      </if>
+      <if test="publishTime != null">
+        #{publishTime,jdbcType=DATE},
+      </if>
+      <if test="popularScienceCategoryId != null">
+        #{popularScienceCategoryId,jdbcType=INTEGER},
+      </if>
+      <if test="htmlText != null">
+        #{htmlText,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.unimedsci.ydata.jxc.commons.datas.PopularScience">
+
+    update popular_science
+    <set>
+      <if test="popularScienceTitle != null">
+        popular_science_title = #{popularScienceTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="mainImgName != null">
+        main_img_name = #{mainImgName,jdbcType=VARCHAR},
+      </if>
+      <if test="publishTime != null">
+        publish_time = #{publishTime,jdbcType=DATE},
+      </if>
+      <if test="popularScienceCategoryId != null">
+        popular_science_category_id = #{popularScienceCategoryId,jdbcType=INTEGER},
+      </if>
+      <if test="htmlText != null">
+        html_text = #{htmlText,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where popular_science_id = #{popularScienceId,jdbcType=INTEGER}
+  </update>
+
+  <update id="updateByPrimaryKey" parameterType="com.unimedsci.ydata.jxc.commons.datas.PopularScience">
+
+    update popular_science
+    set popular_science_title = #{popularScienceTitle,jdbcType=VARCHAR},
+      main_img_name = #{mainImgName,jdbcType=VARCHAR},
+      publish_time = #{publishTime,jdbcType=DATE},
+      popular_science_category_id = #{popularScienceCategoryId,jdbcType=INTEGER},
+    html_text = #{htmlText,jdbcType=LONGVARCHAR},
+    status = #{status}
+    where popular_science_id = #{popularScienceId,jdbcType=INTEGER}
+  </update>
+
+
+  <select id="queryPopularScienceList" parameterType="java.util.Map" resultType="com.unimedsci.ydata.jxc.commons.datas.PopularScience">
+     select *
+     from  popular_science a
+     where a.`status` = 'ACTIVE'
+     <if test="popularScienceTitle != null and popularScienceTitle != ''">
+       and a.popular_science_title like concat ('%',#{popularScienceTitle},'%')
+     </if>
+    <if test="popularScienceCategoryId != null">
+      and a.popular_science_category_id = #{popularScienceCategoryId}
+    </if>
+    <if test="popularScienceId != null">
+      and a.popular_science_id = #{popularScienceId}
+    </if>
+  </select>
+</mapper>

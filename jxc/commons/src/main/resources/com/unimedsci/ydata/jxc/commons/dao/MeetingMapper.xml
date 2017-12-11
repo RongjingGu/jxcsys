@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.unimedsci.ydata.jxc.commons.dao.MeetingMapper">
+    <resultMap id="BaseResultMap" type="com.unimedsci.ydata.jxc.commons.datas.Meeting">
+        <id column="meeting_id" jdbcType="INTEGER" property="meetingId"/>
+        <result column="meeting_title" jdbcType="VARCHAR" property="meetingTitle"/>
+        <result column="begin_time" jdbcType="TIMESTAMP" property="beginTime"/>
+        <result column="end_time" jdbcType="TIMESTAMP" property="endTime"/>
+        <result column="main_img_name" jdbcType="VARCHAR" property="mainImgName"/>
+        <result column="location_id" jdbcType="INTEGER" property="locationId"/>
+        <result column="location" jdbcType="VARCHAR" property="location"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="status" jdbcType="VARCHAR" property="status"/>
+    </resultMap>
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.unimedsci.ydata.jxc.commons.datas.Meeting">
+        <!--
+          WARNING - @mbggenerated
+          Generated on 2017-11-30 15:36:04.
+        -->
+        <result column="html_text" jdbcType="LONGVARCHAR" property="htmlText"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        meeting_id, meeting_title, begin_time, end_time, main_img_name, location_id, location,
+        create_time, status
+    </sql>
+    <sql id="Blob_Column_List">
+        html_text
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from meeting
+        where meeting_id = #{meetingId,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from meeting
+        where meeting_id = #{meetingId,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.unimedsci.ydata.jxc.commons.datas.Meeting" keyProperty="meetingId" useGeneratedKeys="true">
+        insert into meeting (meeting_title, begin_time,
+        end_time, main_img_name, location_id,
+        location, create_time, status,
+        html_text)
+        values ( #{meetingTitle,jdbcType=VARCHAR}, #{beginTime,jdbcType=TIMESTAMP},
+        #{endTime,jdbcType=TIMESTAMP}, #{mainImgName,jdbcType=VARCHAR}, #{locationId,jdbcType=INTEGER},
+        #{location,jdbcType=VARCHAR}, sysdate(), #{status,jdbcType=VARCHAR},
+        #{htmlText,jdbcType=LONGVARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.unimedsci.ydata.jxc.commons.datas.Meeting">
+        insert into meeting
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="meetingId != null">
+                meeting_id,
+            </if>
+            <if test="meetingTitle != null">
+                meeting_title,
+            </if>
+            <if test="beginTime != null">
+                begin_time,
+            </if>
+            <if test="endTime != null">
+                end_time,
+            </if>
+            <if test="mainImgName != null">
+                main_img_name,
+            </if>
+            <if test="locationId != null">
+                location_id,
+            </if>
+            <if test="location != null">
+                location,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="htmlText != null">
+                html_text,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="meetingId != null">
+                #{meetingId,jdbcType=INTEGER},
+            </if>
+            <if test="meetingTitle != null">
+                #{meetingTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="beginTime != null">
+                #{beginTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="endTime != null">
+                #{endTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="mainImgName != null">
+                #{mainImgName,jdbcType=VARCHAR},
+            </if>
+            <if test="locationId != null">
+                #{locationId,jdbcType=INTEGER},
+            </if>
+            <if test="location != null">
+                #{location,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="htmlText != null">
+                #{htmlText,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.unimedsci.ydata.jxc.commons.datas.Meeting">
+        <!--
+          WARNING - @mbggenerated
+          Generated on 2017-11-30 15:36:04.
+        -->
+        update meeting
+        <set>
+            <if test="meetingTitle != null">
+                meeting_title = #{meetingTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="beginTime != null">
+                begin_time = #{beginTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="endTime != null">
+                end_time = #{endTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="mainImgName != null">
+                main_img_name = #{mainImgName,jdbcType=VARCHAR},
+            </if>
+            <if test="locationId != null">
+                location_id = #{locationId,jdbcType=INTEGER},
+            </if>
+            <if test="location != null">
+                location = #{location,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="htmlText != null">
+                html_text = #{htmlText,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where meeting_id = #{meetingId,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.unimedsci.ydata.jxc.commons.datas.Meeting">
+        update meeting
+        set meeting_title = #{meetingTitle,jdbcType=VARCHAR},
+        begin_time = #{beginTime,jdbcType=TIMESTAMP},
+        end_time = #{endTime,jdbcType=TIMESTAMP},
+        main_img_name = #{mainImgName,jdbcType=VARCHAR},
+        location_id = #{locationId,jdbcType=INTEGER},
+        location = #{location,jdbcType=VARCHAR},
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+        status = #{status,jdbcType=VARCHAR},
+        html_text = #{htmlText,jdbcType=LONGVARCHAR}
+        where meeting_id = #{meetingId,jdbcType=INTEGER}
+    </update>
+
+
+    <select id="queryMeetingList" parameterType="java.util.Map"
+            resultType="com.unimedsci.ydata.jxc.commons.datas.Meeting">
+        select
+        a.meeting_id,
+        a.meeting_title,
+        a.begin_time,
+        a.end_time,
+        a.main_img_name,
+        a.location_id,
+        a.html_text,
+        a.create_time,
+        a.`status`,
+        b.region_name AS location
+        from meeting a
+        LEFT JOIN region b ON a.location_id = b.region_id
+        where a.`status` ='ACTIVE'
+        <if test="meetingTitle != null and meetingTitle != ''">
+            and a.meeting_title like concat('%',#{meetingTitle},'%')
+        </if>
+        <if test="meetingId != null ">
+            and a.meeting_id = #{meetingId}
+        </if>
+        <if test="beginTime != null">
+            and a.begin_time >= #{beginTime}
+        </if>
+
+        <if test="endTime != null">
+        <![CDATA[
+            and a.end_time <= #{endTime}]]>
+        </if>
+        order by a.begin_time desc
+    </select>
+
+</mapper>

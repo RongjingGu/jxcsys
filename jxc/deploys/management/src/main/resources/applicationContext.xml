@@ -80,7 +80,7 @@
             </bean>
         </mvc:interceptor>
     </mvc:interceptors>
-    <bean id="portalAuditImpl" class="com.unimedsci.ydata.hdwx.authorizer.hdwxManagementAudit"/>
+    <bean id="portalAuditImpl" class="com.unimedsci.ydata.jxc.authorizer.hdwxManagementAudit"/>
 
 
     <!-- spring自己的换管理器，这里定义了两个缓存位置名称 ，既注解中的value -->

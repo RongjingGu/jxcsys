@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.unimedsci.ydata.jxc.commons.dao.PopularScienceCategoryMapper">
+    <resultMap id="BaseResultMap" type="com.unimedsci.ydata.jxc.commons.datas.PopularScienceCategory">
+        <!--
+          WARNING - @mbggenerated
+          Generated on 2017-11-30 15:36:04.
+        -->
+        <id column="popular_science_category_id" jdbcType="INTEGER" property="popularScienceCategoryId"/>
+        <result column="category_name" jdbcType="VARCHAR" property="categoryName"/>
+        <result column="order" jdbcType="INTEGER" property="order"/>
+        <result column="status" jdbcType="VARCHAR" property="status"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--
+          WARNING - @mbggenerated
+          Generated on 2017-11-30 15:36:04.
+        -->
+        popular_science_category_id, category_name, order, status
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        <!--
+          WARNING - @mbggenerated
+          Generated on 2017-11-30 15:36:04.
+        -->
+        select
+        <include refid="Base_Column_List"/>
+        from popular_science_category
+        where popular_science_category_id = #{popularScienceCategoryId,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        <!--
+          WARNING - @mbggenerated
+          Generated on 2017-11-30 15:36:04.
+        -->
+        delete from popular_science_category
+        where popular_science_category_id = #{popularScienceCategoryId,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.unimedsci.ydata.jxc.commons.datas.PopularScienceCategory"
+            keyProperty="popularScienceCategoryId" useGeneratedKeys="true">
+    insert into popular_science_category ( category_name,
+      order, status)
+    values ( #{categoryName,jdbcType=VARCHAR},
+              (SELECT
+                    `order`
+                FROM
+                    (
+                        SELECT
+                            COALESCE (max(`order`), 0) + 1 AS `order`
+                        FROM
+                            popular_science_category
+                    ) a), #{status,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.unimedsci.ydata.jxc.commons.datas.PopularScienceCategory">
+        insert into popular_science_category
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="popularScienceCategoryId != null">
+                popular_science_category_id,
+            </if>
+            <if test="categoryName != null">
+                category_name,
+            </if>
+            <if test="order != null">
+                order,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="popularScienceCategoryId != null">
+                #{popularScienceCategoryId,jdbcType=INTEGER},
+            </if>
+            <if test="categoryName != null">
+                #{categoryName,jdbcType=VARCHAR},
+            </if>
+            <if test="order != null">
+                #{order,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective"
+            parameterType="com.unimedsci.ydata.jxc.commons.datas.PopularScienceCategory">
+        update popular_science_category
+        <set>
+            <if test="categoryName != null">
+                category_name = #{categoryName,jdbcType=VARCHAR},
+            </if>
+            <if test="order != null">
+                order = #{order,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where popular_science_category_id = #{popularScienceCategoryId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.unimedsci.ydata.jxc.commons.datas.PopularScienceCategory">
+        update popular_science_category
+        set category_name = #{categoryName,jdbcType=VARCHAR},
+        order = #{order,jdbcType=INTEGER},
+        status = #{status,jdbcType=VARCHAR}
+        where popular_science_category_id = #{popularScienceCategoryId,jdbcType=INTEGER}
+    </update>
+
+    <select id="queryPopularScienceCategoryList" parameterType="java.util.Map"
+            resultType="com.unimedsci.ydata.jxc.commons.datas.PopularScienceCategory">
+        select
+          *
+        from popular_science_category a
+        where a.status = 'ACTIVE'
+        <if test="categoryName != null and categoryName != ''">
+            and a.category_name like concat('%',#{categoryName},'%')
+        </if>
+        order by
+          a.order asc
+
+    </select>
+
+    <select id="queryPopularScienceCategoryByName" parameterType="java.lang.String"
+            resultType="com.unimedsci.ydata.jxc.commons.datas.PopularScienceCategory">
+        select
+        *
+        from popular_science_category a
+        where a.status = 'ACTIVE'
+         and a.category_name =#{categoryName}
+    </select>
+
+
+    <update id="updateOrderByPrimaryKey" parameterType="java.util.Map">
+        update popular_science_category
+        set order = #{order,jdbcType=INTEGER}
+        where popular_science_category_id = #{popularScienceCategoryId,jdbcType=INTEGER}
+    </update>
+
+
+
+</mapper>

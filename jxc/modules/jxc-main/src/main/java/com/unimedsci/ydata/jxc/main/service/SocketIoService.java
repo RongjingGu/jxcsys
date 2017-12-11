@@ -6,11 +6,11 @@ import com.corundumstudio.socketio.SocketIOServer;
 import com.corundumstudio.socketio.listener.DataListener;
 import com.sweetw.idata.commons.exception.CustomException;
 import com.unimedsci.ydata.jxc.main.listener.ListenerFactory;
-import com.unimedsci.ydata.jxz.commons.util.StringUtil;
+import com.unimedsci.ydata.jxc.commons.util.StringUtil;
 import com.unimedsci.ydata.jxc.main.data.ConversationInfo;
 import com.unimedsci.ydata.jxc.main.listener.BaseListener;
 import com.unimedsci.ydata.jxc.main.listener.ConnListener;
-import com.unimedsci.ydata.hdwx.settings.SettingsBean;
+import com.unimedsci.ydata.jxc.settings.SettingsBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

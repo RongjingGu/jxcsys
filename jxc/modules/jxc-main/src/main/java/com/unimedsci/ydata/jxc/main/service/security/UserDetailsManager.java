@@ -6,9 +6,9 @@ package com.unimedsci.ydata.jxc.main.service.security;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.unimedsci.ydata.jxz.commons.util.HdwxUserDetails;
-import com.unimedsci.ydata.hdwx.pdmsInterface.PdmsService;
-import com.unimedsci.ydata.jxz.commons.annotations.AppUserType;
+import com.unimedsci.ydata.jxc.commons.util.HdwxUserDetails;
+import com.unimedsci.ydata.jxc.pdmsInterface.PdmsService;
+import com.unimedsci.ydata.jxc.commons.annotations.AppUserType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

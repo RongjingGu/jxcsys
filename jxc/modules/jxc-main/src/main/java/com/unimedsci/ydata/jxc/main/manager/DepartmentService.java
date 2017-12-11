@@ -2,12 +2,12 @@ package com.unimedsci.ydata.jxc.main.manager;
 
 import com.alibaba.fastjson.JSONObject;
 import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
-import com.unimedsci.ydata.jxz.commons.dao.*;
-import com.unimedsci.ydata.jxz.commons.datas.*;
-import com.unimedsci.ydata.jxz.commons.util.SortDirection;
-import com.unimedsci.ydata.jxz.commons.util.StringUtil;
-import com.unimedsci.ydata.hdwx.pdmsInterface.PdmsService;
-import com.unimedsci.ydata.hdwx.settings.SettingsBean;
+import com.unimedsci.ydata.jxc.commons.dao.*;
+import com.unimedsci.ydata.jxc.commons.datas.*;
+import com.unimedsci.ydata.jxc.commons.util.SortDirection;
+import com.unimedsci.ydata.jxc.commons.util.StringUtil;
+import com.unimedsci.ydata.jxc.pdmsInterface.PdmsService;
+import com.unimedsci.ydata.jxc.settings.SettingsBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.unimedsci.ydata.jxc.commons.dao.ConversationReadRecordMapper">
+  <resultMap id="BaseResultMap" type="com.unimedsci.ydata.jxc.commons.datas.ConversationReadRecord">
+    <!--
+      WARNING - @mbggenerated
+      Generated on 2017-11-30 15:36:03.
+    -->
+    <id column="question_read_record_id" jdbcType="INTEGER" property="questionReadRecordId" />
+    <id column="conversation_id" jdbcType="INTEGER" property="conversationId" />
+    <result column="ydata_account_id" jdbcType="INTEGER" property="ydataAccountId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="last_update_time" jdbcType="TIMESTAMP" property="lastUpdateTime" />
+    <result column="last_read_time" jdbcType="TIMESTAMP" property="lastReadTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbggenerated
+      Generated on 2017-11-30 15:36:03.
+    -->
+    question_read_record_id, conversation_id, ydata_account_id, create_time, last_update_time, 
+    last_read_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="com.unimedsci.ydata.jxc.commons.datas.ConversationReadRecordKey" resultMap="BaseResultMap">
+    <!--
+      WARNING - @mbggenerated
+      Generated on 2017-11-30 15:36:03.
+    -->
+    select 
+    <include refid="Base_Column_List" />
+    from conversation_read_record
+    where question_read_record_id = #{questionReadRecordId,jdbcType=INTEGER}
+      and conversation_id = #{conversationId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.unimedsci.ydata.jxc.commons.datas.ConversationReadRecordKey">
+    <!--
+      WARNING - @mbggenerated
+      Generated on 2017-11-30 15:36:03.
+    -->
+    delete from conversation_read_record
+    where question_read_record_id = #{questionReadRecordId,jdbcType=INTEGER}
+      and conversation_id = #{conversationId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.unimedsci.ydata.jxc.commons.datas.ConversationReadRecord">
+    <!--
+      WARNING - @mbggenerated
+      Generated on 2017-11-30 15:36:03.
+    -->
+    insert into conversation_read_record (question_read_record_id, conversation_id, 
+      ydata_account_id, create_time, last_update_time, 
+      last_read_time)
+    values (#{questionReadRecordId,jdbcType=INTEGER}, #{conversationId,jdbcType=INTEGER}, 
+      #{ydataAccountId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{lastUpdateTime,jdbcType=TIMESTAMP}, 
+      #{lastReadTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.unimedsci.ydata.jxc.commons.datas.ConversationReadRecord">
+    <!--
+      WARNING - @mbggenerated
+      Generated on 2017-11-30 15:36:03.
+    -->
+    insert into conversation_read_record
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="questionReadRecordId != null">
+        question_read_record_id,
+      </if>
+      <if test="conversationId != null">
+        conversation_id,
+      </if>
+      <if test="ydataAccountId != null">
+        ydata_account_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="lastUpdateTime != null">
+        last_update_time,
+      </if>
+      <if test="lastReadTime != null">
+        last_read_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="questionReadRecordId != null">
+        #{questionReadRecordId,jdbcType=INTEGER},
+      </if>
+      <if test="conversationId != null">
+        #{conversationId,jdbcType=INTEGER},
+      </if>
+      <if test="ydataAccountId != null">
+        #{ydataAccountId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdateTime != null">
+        #{lastUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastReadTime != null">
+        #{lastReadTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.unimedsci.ydata.jxc.commons.datas.ConversationReadRecord">
+    <!--
+      WARNING - @mbggenerated
+      Generated on 2017-11-30 15:36:03.
+    -->
+    update conversation_read_record
+    <set>
+      <if test="ydataAccountId != null">
+        ydata_account_id = #{ydataAccountId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdateTime != null">
+        last_update_time = #{lastUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastReadTime != null">
+        last_read_time = #{lastReadTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where question_read_record_id = #{questionReadRecordId,jdbcType=INTEGER}
+      and conversation_id = #{conversationId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.unimedsci.ydata.jxc.commons.datas.ConversationReadRecord">
+    <!--
+      WARNING - @mbggenerated
+      Generated on 2017-11-30 15:36:03.
+    -->
+    update conversation_read_record
+    set ydata_account_id = #{ydataAccountId,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      last_update_time = #{lastUpdateTime,jdbcType=TIMESTAMP},
+      last_read_time = #{lastReadTime,jdbcType=TIMESTAMP}
+    where question_read_record_id = #{questionReadRecordId,jdbcType=INTEGER}
+      and conversation_id = #{conversationId,jdbcType=INTEGER}
+  </update>
+</mapper>

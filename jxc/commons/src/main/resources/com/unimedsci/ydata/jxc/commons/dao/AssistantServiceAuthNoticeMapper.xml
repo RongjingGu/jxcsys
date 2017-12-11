@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.unimedsci.ydata.jxc.commons.dao.AssistantServiceAuthNoticeMapper">
+  <resultMap id="BaseResultMap" type="com.unimedsci.ydata.jxc.commons.datas.AssistantServiceAuthNotice">
+    <!--
+      WARNING - @mbggenerated
+      Generated on 2017-11-30 15:36:03.
+    -->
+    <id column="assistant_service_auth_notice_id" jdbcType="INTEGER" property="assistantServiceAuthNoticeId" />
+    <result column="assistant_service_auth_id" jdbcType="INTEGER" property="assistantServiceAuthId" />
+    <result column="msg_type" jdbcType="VARCHAR" property="msgType" />
+    <result column="notice_target_acct_id" jdbcType="INTEGER" property="noticeTargetAcctId" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="read_time" jdbcType="TIMESTAMP" property="readTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbggenerated
+      Generated on 2017-11-30 15:36:03.
+    -->
+    assistant_service_auth_notice_id, assistant_service_auth_id, msg_type, notice_target_acct_id, 
+    status, read_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <!--
+      WARNING - @mbggenerated
+      Generated on 2017-11-30 15:36:03.
+    -->
+    select 
+    <include refid="Base_Column_List" />
+    from assistant_service_auth_notice
+    where assistant_service_auth_notice_id = #{assistantServiceAuthNoticeId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <!--
+      WARNING - @mbggenerated
+      Generated on 2017-11-30 15:36:03.
+    -->
+    delete from assistant_service_auth_notice
+    where assistant_service_auth_notice_id = #{assistantServiceAuthNoticeId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.unimedsci.ydata.jxc.commons.datas.AssistantServiceAuthNotice">
+    <!--
+      WARNING - @mbggenerated
+      Generated on 2017-11-30 15:36:03.
+    -->
+    insert into assistant_service_auth_notice (assistant_service_auth_notice_id, assistant_service_auth_id, 
+      msg_type, notice_target_acct_id, status, 
+      read_time)
+    values (#{assistantServiceAuthNoticeId,jdbcType=INTEGER}, #{assistantServiceAuthId,jdbcType=INTEGER}, 
+      #{msgType,jdbcType=VARCHAR}, #{noticeTargetAcctId,jdbcType=INTEGER}, #{status,jdbcType=VARCHAR}, 
+      #{readTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.unimedsci.ydata.jxc.commons.datas.AssistantServiceAuthNotice">
+    <!--
+      WARNING - @mbggenerated
+      Generated on 2017-11-30 15:36:03.
+    -->
+    insert into assistant_service_auth_notice
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="assistantServiceAuthNoticeId != null">
+        assistant_service_auth_notice_id,
+      </if>
+      <if test="assistantServiceAuthId != null">
+        assistant_service_auth_id,
+      </if>
+      <if test="msgType != null">
+        msg_type,
+      </if>
+      <if test="noticeTargetAcctId != null">
+        notice_target_acct_id,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="readTime != null">
+        read_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="assistantServiceAuthNoticeId != null">
+        #{assistantServiceAuthNoticeId,jdbcType=INTEGER},
+      </if>
+      <if test="assistantServiceAuthId != null">
+        #{assistantServiceAuthId,jdbcType=INTEGER},
+      </if>
+      <if test="msgType != null">
+        #{msgType,jdbcType=VARCHAR},
+      </if>
+      <if test="noticeTargetAcctId != null">
+        #{noticeTargetAcctId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="readTime != null">
+        #{readTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.unimedsci.ydata.jxc.commons.datas.AssistantServiceAuthNotice">
+    <!--
+      WARNING - @mbggenerated
+      Generated on 2017-11-30 15:36:03.
+    -->
+    update assistant_service_auth_notice
+    <set>
+      <if test="assistantServiceAuthId != null">
+        assistant_service_auth_id = #{assistantServiceAuthId,jdbcType=INTEGER},
+      </if>
+      <if test="msgType != null">
+        msg_type = #{msgType,jdbcType=VARCHAR},
+      </if>
+      <if test="noticeTargetAcctId != null">
+        notice_target_acct_id = #{noticeTargetAcctId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="readTime != null">
+        read_time = #{readTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where assistant_service_auth_notice_id = #{assistantServiceAuthNoticeId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.unimedsci.ydata.jxc.commons.datas.AssistantServiceAuthNotice">
+    <!--
+      WARNING - @mbggenerated
+      Generated on 2017-11-30 15:36:03.
+    -->
+    update assistant_service_auth_notice
+    set assistant_service_auth_id = #{assistantServiceAuthId,jdbcType=INTEGER},
+      msg_type = #{msgType,jdbcType=VARCHAR},
+      notice_target_acct_id = #{noticeTargetAcctId,jdbcType=INTEGER},
+      status = #{status,jdbcType=VARCHAR},
+      read_time = #{readTime,jdbcType=TIMESTAMP}
+    where assistant_service_auth_notice_id = #{assistantServiceAuthNoticeId,jdbcType=INTEGER}
+  </update>
+</mapper>

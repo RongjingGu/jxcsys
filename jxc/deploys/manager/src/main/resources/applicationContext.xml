@@ -1,41 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
-	xmlns:lang="http://www.springframework.org/schema/lang" xmlns:tx="http://www.springframework.org/schema/tx"
-	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:cache="http://www.springframework.org/schema/cache" xmlns:mvc="http://www.springframework.org/schema/mvc"
-	xmlns:task="http://www.springframework.org/schema/task"
-      	xmlns:websocket="http://www.springframework.org/schema/websocket"  
-	 xsi:schemaLocation="http://www.springframework.org/schema/beans
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	   xmlns:lang="http://www.springframework.org/schema/lang" xmlns:tx="http://www.springframework.org/schema/tx"
+	   xmlns:aop="http://www.springframework.org/schema/aop" xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:cache="http://www.springframework.org/schema/cache" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	   xmlns:task="http://www.springframework.org/schema/task"
+	   xmlns:websocket="http://www.springframework.org/schema/websocket"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
 	         http://www.springframework.org/schema/beans/spring-beans.xsd
 	         http://www.springframework.org/schema/lang
-	         http://www.springframework.org/schema/lang/spring-lang.xsd      
-	         http://www.springframework.org/schema/tx   
-	         http://www.springframework.org/schema/tx/spring-tx.xsd    
-	         http://www.springframework.org/schema/aop     
-	         http://www.springframework.org/schema/aop/spring-aop.xsd    
-	         http://www.springframework.org/schema/mvc     
-	         http://www.springframework.org/schema/mvc/spring-mvc.xsd   
-	         http://www.springframework.org/schema/context     
+	         http://www.springframework.org/schema/lang/spring-lang.xsd
+	         http://www.springframework.org/schema/tx
+	         http://www.springframework.org/schema/tx/spring-tx.xsd
+	         http://www.springframework.org/schema/aop
+	         http://www.springframework.org/schema/aop/spring-aop.xsd
+	         http://www.springframework.org/schema/mvc
+	         http://www.springframework.org/schema/mvc/spring-mvc.xsd
+	         http://www.springframework.org/schema/context
 	         http://www.springframework.org/schema/context/spring-context.xsd
 	         http://www.springframework.org/schema/cache
 	         http://www.springframework.org/schema/cache/spring-cache.xsd
-	         http://www.springframework.org/schema/task 
+	         http://www.springframework.org/schema/task
 	         http://www.springframework.org/schema/task/spring-task.xsd
-	         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd  
+	         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
         	http://www.springframework.org/schema/websocket http://www.springframework.org/schema/websocket/spring-websocket.xsd"
-	         >
+>
 
 	<!-- 自动扫描的包名 -->
-	<tx:annotation-driven />	
-  
-    <mvc:resources mapping="/bootstrap/**" location="/bootstrap/"/>    
-	<mvc:resources mapping="/css/**" location="/css/"/>    
-	<mvc:resources mapping="/js/**" location="/js/"/>    
+	<tx:annotation-driven />
+
+	<mvc:resources mapping="/bootstrap/**" location="/bootstrap/"/>
+	<mvc:resources mapping="/css/**" location="/css/"/>
+	<mvc:resources mapping="/js/**" location="/js/"/>
 	<mvc:resources mapping="/video/**" location="/video/"/>
 	<mvc:resources mapping="/images/**" location="/images/"/>
 	<mvc:resources mapping="/fonts/**" location="/fonts/"/>
-    <context:component-scan base-package="com.unimedsci.ydata.hdwx"></context:component-scan>
+	<context:component-scan base-package="com.unimedsci.ydata.hdwx"></context:component-scan>
 	<context:component-scan base-package="com.sweetw"></context:component-scan>
 
 	<mvc:cors>
@@ -45,101 +45,101 @@
 
 	<task:annotation-driven />
 
-	<bean class="com.unimedsci.ydata.jxc.main.service.InitDataListener"/>
- 
-    <mvc:annotation-driven>  
-        <mvc:message-converters register-defaults="true">  
-            <bean  
-                class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">  
-                <property name="objectMapper">  
-                    <bean class="com.fasterxml.jackson.databind.ObjectMapper">  
-                        <property name="dateFormat">  
-                            <bean class="java.text.SimpleDateFormat">  
-                                <constructor-arg value="yyyy-MM-dd HH:mm:ss" />  
-                            </bean>  
-                        </property>  
-                    </bean>  
-                </property>  
-            </bean>  
-        </mvc:message-converters>   
-    </mvc:annotation-driven>  
-    
-    <!-- <mvc:default-servlet-handler />     -->
+	<!--<bean class="com.unimedsci.ydata.hdwx.main.service.InitDataListener"/>-->
+
+	<mvc:annotation-driven>
+		<mvc:message-converters register-defaults="true">
+			<bean
+					class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+				<property name="objectMapper">
+					<bean class="com.fasterxml.jackson.databind.ObjectMapper">
+						<property name="dateFormat">
+							<bean class="java.text.SimpleDateFormat">
+								<constructor-arg value="yyyy-MM-dd HH:mm:ss" />
+							</bean>
+						</property>
+					</bean>
+				</property>
+			</bean>
+		</mvc:message-converters>
+	</mvc:annotation-driven>
+
+	<!-- <mvc:default-servlet-handler />     -->
 
 	<!-- <mvc:default-servlet-handler/> -->
 	<!-- <cache:annotation-driven key-generator="keyGeneratorService"/> -->
 	<!--<mvc:interceptors>-->
-		<!--<mvc:interceptor>
-			<mvc:mapping path="/**" />
-			<bean class="com.sweetw.idata.commons.interceptor.CustomInterceptor">
-				<property name="roleAuthorityManagement" ref="authority"></property>
-				<property name="roleId" value="roleId"></property>
-			</bean>
-		</mvc:interceptor>-->
+	<!--<mvc:interceptor>
+        <mvc:mapping path="/**" />
+        <bean class="com.sweetw.idata.commons.interceptor.CustomInterceptor">
+            <property name="roleAuthorityManagement" ref="authority"></property>
+            <property name="roleId" value="roleId"></property>
+        </bean>
+    </mvc:interceptor>-->
 	<!--</mvc:interceptors>-->
 
-    <!--<bean id="authority" class="com.unimedsci.pdms.authorizer.ImplRoleAuthorityManagement"></bean>-->
+	<!--<bean id="authority" class="com.unimedsci.pdms.authorizer.ImplRoleAuthorityManagement"></bean>-->
 
 	<!-- spring自己的换管理器，这里定义了两个缓存位置名称 ，既注解中的value -->
-	 <bean id="cacheManager" class="org.springframework.cache.support.SimpleCacheManager">
+	<bean id="cacheManager" class="org.springframework.cache.support.SimpleCacheManager">
 		<property name="caches">
 			<set>
 				<bean
-					class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean"
-					p:name="default" />
+						class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean"
+						p:name="default" />
 				<bean
-					class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean"
-					p:name="config" />
+						class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean"
+						p:name="config" />
 				<bean
-					class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean"
-					p:name="folder" />
+						class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean"
+						p:name="folder" />
 				<bean
-					class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean"
-					p:name="article" />
+						class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean"
+						p:name="article" />
 				<bean
-					class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean"
-					p:name="media" />
+						class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean"
+						p:name="media" />
 			</set>
 		</property>
-	</bean> 
+	</bean>
 
 	<!-- 在XML配置文件中加入外部属性文件，当然也可以指定外部文件的编码-->
-	 <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
-	 p:ignoreUnresolvablePlaceholders="true"
-	 p:ignoreResourceNotFound="true">
+	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
+		  p:ignoreUnresolvablePlaceholders="true"
+		  p:ignoreResourceNotFound="true">
 		<property name="locations">
 			<list>
-				<value>classpath:jdbc.properties</value> 
+				<value>classpath:jdbc.properties</value>
 				<value>classpath:email.properties</value>
 				<value>classpath:config.properties</value>
 				<value>classpath:shortmessage.properties</value>
 			</list>
 		</property>
-	</bean> 
+	</bean>
 
-<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
-	<property name="host" value="${email.host}" />
-	<property name="port" value="${email.port}" />
-	<property name="username" value="${email.user}" />
-	<property name="password" value="${email.password}" />
-		
-	<property name="javaMailProperties">
-	   <props>
-       	      <prop key="mail.smtp.auth">true</prop>
-       	      <prop key="mail.smtp.starttls.enable">true</prop>
-       	   </props>
-	</property>
-	<property name="DefaultEncoding" value="GBK"/>
-</bean>
-	
-<bean id="mailMail" class="com.sweetw.idata.commons.utils.EmailUtil">
-	<property name="mailSender" ref="mailSender" />
-	<property name="user" value="${email.user}" />
-</bean>
-	
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="${email.host}" />
+		<property name="port" value="${email.port}" />
+		<property name="username" value="${email.user}" />
+		<property name="password" value="${email.password}" />
+
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.smtp.auth">true</prop>
+				<prop key="mail.smtp.starttls.enable">true</prop>
+			</props>
+		</property>
+		<property name="DefaultEncoding" value="GBK"/>
+	</bean>
+
+	<bean id="mailMail" class="com.sweetw.idata.commons.utils.EmailUtil">
+		<property name="mailSender" ref="mailSender" />
+		<property name="user" value="${email.user}" />
+	</bean>
+
 	<!-- 图片上传的配置 -->
 	<bean id="multipartResolver"
-		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		  class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<!-- 最大值4M -->
 		<property name="maxUploadSize" value="209715200" />
 		<property name="resolveLazily" value="true" />
@@ -207,38 +207,38 @@
 	<!-- 创建SqlSessionFactory，同时指定数据源 -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
- 		<property name="configLocation" value="classpath:mybatis-config.xml"/> 
+		<property name="configLocation" value="classpath:mybatis-config.xml"/>
 	</bean>
 
 	<!-- 配置事务管理器 -->
 	<bean id="transactionManager"
-		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		  class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 
 	<!--创建数据映射器，数据映射器必须为接口-->
-	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer"> 
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="annotationClass" value="org.springframework.stereotype.Repository" />
-		<property name="basePackage" value="com.unimedsci.ydata.hdwx" />
+		<property name="basePackage" value="com.unimedsci.ydata.jxc" />
 	</bean>
- 
-    
-	 <bean id="viewResolver"
-	  class="org.springframework.web.servlet.view.UrlBasedViewResolver">
-	  <property name="viewClass"
-	   value="org.springframework.web.servlet.view.JstlView" />
-	  <property name="prefix" value="/" />
-	  <property name="suffix" value=".jsp" />
-	 </bean>
 
- <bean id="handlerExceptionResolver" class="com.sweetw.idata.commons.exception.AnnotationHandlerMethodExceptionResolver">
-        <property name="defaultErrorView" value="/404"/> <!--错误页面-->
-        <property name="messageConverters">
-            <list>
-                <bean	class="org.springframework.http.converter.ByteArrayHttpMessageConverter" />
-                <!-- JSON转换器无需设置mediaType,由外部客户端调用时，手动设置相关mediaType -->
-                <bean	class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter" />
-            </list>
-        </property>
-    </bean>
+
+	<bean id="viewResolver"
+		  class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+		<property name="viewClass"
+				  value="org.springframework.web.servlet.view.JstlView" />
+		<property name="prefix" value="/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+
+	<bean id="handlerExceptionResolver" class="com.sweetw.idata.commons.exception.AnnotationHandlerMethodExceptionResolver">
+		<property name="defaultErrorView" value="/404"/> <!--错误页面-->
+		<property name="messageConverters">
+			<list>
+				<bean	class="org.springframework.http.converter.ByteArrayHttpMessageConverter" />
+				<!-- JSON转换器无需设置mediaType,由外部客户端调用时，手动设置相关mediaType -->
+				<bean	class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter" />
+			</list>
+		</property>
+	</bean>
 </beans>

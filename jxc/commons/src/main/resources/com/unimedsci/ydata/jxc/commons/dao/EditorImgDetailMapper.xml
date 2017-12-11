@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.unimedsci.ydata.jxc.commons.dao.EditorImgDetailMapper">
+
+  <insert id="insert" parameterType="com.unimedsci.ydata.jxc.commons.datas.EditorImgDetail"
+          useGeneratedKeys="true" keyProperty="editorImgId">
+    INSERT INTO editor_img_detail(img_uuid,editor_img_id)
+    VALUES (#{imgUuid},#{editorImgId})
+  </insert>
+
+  <select id="selectUuidByUuid" parameterType="String" resultType="String">
+    select img_uuid from editor_img_detail where img_uuid = #{uuid}
+  </select>
+
+</mapper>

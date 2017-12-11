@@ -1,10 +1,10 @@
 package com.unimedsci.ydata.jxc.main.manager;
 
 import com.sweetw.idata.commons.exception.CustomException;
-import com.unimedsci.ydata.jxz.commons.dao.EditorImgDetailMapper;
-import com.unimedsci.ydata.jxz.commons.dao.EditorImgMapper;
-import com.unimedsci.ydata.jxz.commons.datas.EditorImg;
-import com.unimedsci.ydata.jxz.commons.datas.EditorImgDetail;
+import com.unimedsci.ydata.jxc.commons.dao.EditorImgDetailMapper;
+import com.unimedsci.ydata.jxc.commons.dao.EditorImgMapper;
+import com.unimedsci.ydata.jxc.commons.datas.EditorImg;
+import com.unimedsci.ydata.jxc.commons.datas.EditorImgDetail;
 import com.unimedsci.ydata.jxc.main.data.FileMeta;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.unimedsci.ydata.jxc.commons.dao.EditorImgMapper">
+  <resultMap id="EditorImg" type="com.unimedsci.ydata.jxc.commons.datas.EditorImg">
+    <result column="editor_img_id" property="editorImgId"/>
+    <result column="relate_id" property="relateId"/>
+    <result column="relate_type" property="relateType"/>
+    <result column="last_view_time" property="lastViewTime"/>
+    <collection property="imgUuidList" column="img_uuid" resultMap="ImgUuidMap"/>
+
+  </resultMap>
+  <resultMap id="ImgUuidMap" type="String">
+    <result property="imgUuidList" column="img_uuid"/>
+  </resultMap>
+
+  <insert id="insert" parameterType="com.unimedsci.ydata.jxc.commons.datas.EditorImg"
+          useGeneratedKeys="true" keyProperty="editorImgId">
+    INSERT INTO editor_img(relate_id,relate_type,last_view_time)
+    VALUES (#{relateId},#{relateType},#{lastViewTime})
+  </insert>
+
+  <update id="update" parameterType="com.unimedsci.ydata.jxc.commons.datas.EditorImg">
+    UPDATE editor_img
+    <set>
+      relate_id = #{relateId},
+      relate_type = #{relateType},
+      last_view_time = #{lastViewTime},
+    </set>
+    WHERE editor_img_id = #{editorImgId}
+  </update>
+
+  <select id="selectById" parameterType="Integer"
+          resultMap="EditorImg">
+    select a.*,ifnull(b.img_uuid,'') img_uuid from editor_img a
+      left join editor_img_detail b on a.editor_img_id = b.editor_img_id
+    where a.editor_img_id = #{editorImgId}
+  </select>
+
+  <select id="selectByRelateInfo" parameterType="Map"
+          resultMap="EditorImg">
+      select a.*,ifnull(b.img_uuid,'') img_uuid  from editor_img a
+      left join editor_img_detail b on a.editor_img_id = b.editor_img_id
+      where a.relate_id = #{relateId}
+      and a.relate_type = #{relateType}
+  </select>
+
+</mapper>

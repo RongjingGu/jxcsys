@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.unimedsci.ydata.jxc.commons.dao.ConversationDetailMapper">
+  <resultMap id="BaseResultMap" type="com.unimedsci.ydata.jxc.commons.datas.ConversationDetail">
+    <!--
+      WARNING - @mbggenerated
+      Generated on 2017-11-30 15:36:03.
+    -->
+    <id column="conversation_detail_id" jdbcType="BIGINT" property="conversationDetailId" />
+    <result column="conversation_id" jdbcType="INTEGER" property="conversationId" />
+    <result column="conversation_source" jdbcType="VARCHAR" property="conversationSource" />
+    <result column="msg" jdbcType="VARCHAR" property="msg" />
+    <result column="ydata_account_id" jdbcType="INTEGER" property="ydataAccountId" />
+    <result column="media_id" jdbcType="VARCHAR" property="mediaId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="struct_msg" jdbcType="VARCHAR" property="structMsg" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbggenerated
+      Generated on 2017-11-30 15:36:03.
+    -->
+    conversation_detail_id, conversation_id, conversation_source, msg, ydata_account_id, 
+    media_id, create_time, struct_msg
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <!--
+      WARNING - @mbggenerated
+      Generated on 2017-11-30 15:36:03.
+    -->
+    select 
+    <include refid="Base_Column_List" />
+    from conversation_detail
+    where conversation_detail_id = #{conversationDetailId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <!--
+      WARNING - @mbggenerated
+      Generated on 2017-11-30 15:36:03.
+    -->
+    delete from conversation_detail
+    where conversation_detail_id = #{conversationDetailId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.unimedsci.ydata.jxc.commons.datas.ConversationDetail">
+    <!--
+      WARNING - @mbggenerated
+      Generated on 2017-11-30 15:36:03.
+    -->
+    insert into conversation_detail (conversation_detail_id, conversation_id, 
+      conversation_source, msg, ydata_account_id, 
+      media_id, create_time, struct_msg
+      )
+    values (#{conversationDetailId,jdbcType=BIGINT}, #{conversationId,jdbcType=INTEGER}, 
+      #{conversationSource,jdbcType=VARCHAR}, #{msg,jdbcType=VARCHAR}, #{ydataAccountId,jdbcType=INTEGER}, 
+      #{mediaId,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{structMsg,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.unimedsci.ydata.jxc.commons.datas.ConversationDetail">
+    <!--
+      WARNING - @mbggenerated
+      Generated on 2017-11-30 15:36:03.
+    -->
+    insert into conversation_detail
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="conversationDetailId != null">
+        conversation_detail_id,
+      </if>
+      <if test="conversationId != null">
+        conversation_id,
+      </if>
+      <if test="conversationSource != null">
+        conversation_source,
+      </if>
+      <if test="msg != null">
+        msg,
+      </if>
+      <if test="ydataAccountId != null">
+        ydata_account_id,
+      </if>
+      <if test="mediaId != null">
+        media_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="structMsg != null">
+        struct_msg,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="conversationDetailId != null">
+        #{conversationDetailId,jdbcType=BIGINT},
+      </if>
+      <if test="conversationId != null">
+        #{conversationId,jdbcType=INTEGER},
+      </if>
+      <if test="conversationSource != null">
+        #{conversationSource,jdbcType=VARCHAR},
+      </if>
+      <if test="msg != null">
+        #{msg,jdbcType=VARCHAR},
+      </if>
+      <if test="ydataAccountId != null">
+        #{ydataAccountId,jdbcType=INTEGER},
+      </if>
+      <if test="mediaId != null">
+        #{mediaId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="structMsg != null">
+        #{structMsg,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.unimedsci.ydata.jxc.commons.datas.ConversationDetail">
+    <!--
+      WARNING - @mbggenerated
+      Generated on 2017-11-30 15:36:03.
+    -->
+    update conversation_detail
+    <set>
+      <if test="conversationId != null">
+        conversation_id = #{conversationId,jdbcType=INTEGER},
+      </if>
+      <if test="conversationSource != null">
+        conversation_source = #{conversationSource,jdbcType=VARCHAR},
+      </if>
+      <if test="msg != null">
+        msg = #{msg,jdbcType=VARCHAR},
+      </if>
+      <if test="ydataAccountId != null">
+        ydata_account_id = #{ydataAccountId,jdbcType=INTEGER},
+      </if>
+      <if test="mediaId != null">
+        media_id = #{mediaId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="structMsg != null">
+        struct_msg = #{structMsg,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where conversation_detail_id = #{conversationDetailId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.unimedsci.ydata.jxc.commons.datas.ConversationDetail">
+    <!--
+      WARNING - @mbggenerated
+      Generated on 2017-11-30 15:36:03.
+    -->
+    update conversation_detail
+    set conversation_id = #{conversationId,jdbcType=INTEGER},
+      conversation_source = #{conversationSource,jdbcType=VARCHAR},
+      msg = #{msg,jdbcType=VARCHAR},
+      ydata_account_id = #{ydataAccountId,jdbcType=INTEGER},
+      media_id = #{mediaId,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      struct_msg = #{structMsg,jdbcType=VARCHAR}
+    where conversation_detail_id = #{conversationDetailId,jdbcType=BIGINT}
+  </update>
+</mapper>
