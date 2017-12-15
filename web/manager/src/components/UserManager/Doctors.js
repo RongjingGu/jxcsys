@@ -4,7 +4,6 @@ import moment from 'moment';
 import API_URL from '../../common/url';
 import { Row, Col, Popconfirm,  Card,Table, Form, Input, Select, Icon, Button, Dropdown, Menu, InputNumber, DatePicker, Modal, message, Upload, notification  } from 'antd';
 import {config} from '../common/config';
-import styles from './style.less';
 
 const FormItem = Form.Item;
 const { Option } = Select;
@@ -30,7 +29,7 @@ class SearchForm extends Component {
                 </FormItem>
                 <FormItem label="绑定状态">
                 {getFieldDecorator('name')(
-                    <Select allowClear>
+                    <Select allowClear style={{width:120}}>
                         <Option value="1">已绑定</Option>
                         <Option value="0">未绑定</Option>
                     </Select>
@@ -314,7 +313,7 @@ state = {
             htmlText:{value:{editorContent:detail.htmlText}},
         } : null
       ) 
-    FormBox=Form.create({mapPropsToFields})(FormBox)
+    // FormBox=Form.create({mapPropsToFields})(FormBox)
     return (
       <div>
             <div>

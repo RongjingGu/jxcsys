@@ -18,6 +18,7 @@ class AddInput extends Component {
   constructor(props) {
     super(props);
     const value = this.props.value || {};
+    console.log(value)    
     this.state = {
       hospital: value.hospital || '',
       department:value.department || '',
@@ -26,24 +27,25 @@ class AddInput extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if ('value' in nextProps) {
+    // if ('value' in nextProps) {
       const value = nextProps.value;
       this.setState(value);
-    }
+    // }
   }
 
   handleChange = (name,e) => {
     this.setState({
       [name]:e.target.value,
-    },()=>{this.triggerChange();console.log(this.state)
-    })
+    },()=>{this.triggerChange()})
 
   }
 
   triggerChange = () => {
     const onChange = this.props.onChange;
+    console.log(onChange)
     if (onChange) {
-      onChange(Object.assign({}, ...this.state));
+      onChange(Object.assign({}, this.state));
+      console.log(this.state)
     }
   }
   render(){
@@ -104,9 +106,7 @@ class FormBox extends React.Component {
 
     remove = (k) => {
       const { form } = this.props;
-      // can use data-binding to get
       const centers = form.getFieldValue('centers');
-      // We need at least one passenger
       if (centers.length === 1) {
         return;
       }  
@@ -181,7 +181,7 @@ class FormBox extends React.Component {
           },
         };
 
-        getFieldDecorator('centers', {initialValue: [{hospital:'',department:'',reseacher:''}]})
+        getFieldDecorator('centers', {initialValue: [0]})
         const centers = getFieldValue('centers');
         const formItems = centers.map((k, index) => {
           return (
@@ -191,7 +191,7 @@ class FormBox extends React.Component {
               required={false}
               key={k}
             >
-              {getFieldDecorator(`names-${k}`, {
+              {getFieldDecorator(`item-${k}`, {initialValue: [{hospital:'',department:'',reseacher:''}]
                 // validateTrigger: ['onChange', 'onBlur'],
                 // rules: [{
                 //   required: true,
@@ -647,8 +647,8 @@ state = {
         console.log(values)
         values.beginTime =values.subjecgtTime && values.subjecgtTime[0].format(dayFormat)
         values.endime = values.subjecgtTime && values.subjecgtTime[1].format(dayFormat)
-        values.mainImgName = values.mainImgName.file.response.data[0].fileName
-        values.htmlText = values.htmlText ? values.htmlText.editorContent : ''
+        values.mainImgName = values.mainImgName && values.mainImgName.file.response.data[0].fileName
+        values.htmlText = values.htmlText && values.htmlText.editorContent 
         values.subjecgtTime = null
         this.save(values)
       }

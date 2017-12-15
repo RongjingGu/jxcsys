@@ -10,6 +10,14 @@ import Doctor from "./components/Team/Doctor"
 import EducationClass from "./components/Education/EducationClass"
 import Detail from "./components/Education/Detail"
 import Question from "./components/Question"
+import ConsulHistory from "./components/ConsulHistory"
+import ConsulHot from "./components/ConsulHot"
+import Assistants from "./components/usermanager/Assistants"
+import Doctors from "./components/usermanager/Doctors"
+import Patients from "./components/usermanager/Patients"
+import Serive from "./components/Serive"
+import Arrangement from "./components/Arrangement"
+import Auth from "./components/Auth"
 
 const routes = [{
     path: '/',
@@ -55,6 +63,38 @@ const routes = [{
     path: '/question',
     exact: true,
     render: () => <Question />,
+}, {
+    path: '/consulhistory',
+    exact: true,
+    render: () => <ConsulHistory />,
+}, {
+    path: '/consulhot',
+    exact: true,
+    render: () => <ConsulHot />,
+}, {
+    path: '/usermanager/assistants',
+    exact: true,
+    render: () => <Assistants />,
+}, {
+    path: '/usermanager/doctors',
+    exact: true,
+    render: () => <Doctors />,
+}, {
+    path: '/usermanager/patients',
+    exact: true,
+    render: () => <Patients />,
+}, {
+    path: '/serive',
+    exact: true,
+    render: () => <Serive />,
+}, {
+    path: '/arrangement',
+    exact: true,
+    render: () => <Arrangement />,
+}, {
+    path: '/auth',
+    exact: true,
+    render: () => <Auth />,
 }
 
 ];

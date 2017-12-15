@@ -37,12 +37,11 @@ if (!STATIC) {
             queryCarrouselImgList: `${ENV.ADMIN_URL}/department/queryCarrouselImgList.do`,
             addCarrouselImg: `${ENV.ADMIN_URL}/department/addCarrouselImg.do`,
             deleteCarrouselImg: `${ENV.ADMIN_URL}/department/deleteCarrouselImg.do`,
-            modifCarrouselImg: `${ENV.ADMIN_URL}/department/modifCarrouselImg.do`,
+            modifyCarrouselImg: `${ENV.ADMIN_URL}/department/modifyCarrouselImg.do`,
             //添加部门
-            queryDepartmentById: `${ENV.ADMIN_URL}/department/queryDepartmentById.do`,
-            addDepartment: `${ENV.ADMIN_URL}/department/addDepartment.do`,
+            queryDepartment: `${ENV.ADMIN_URL}/department/queryDepartment.do`,
+            addDepartment: `${ENV.ADMIN_URL}/department/modifyDepartment.do`,
             modifyDepartment: `${ENV.ADMIN_URL}/department/modifyDepartment.do`,
-            addDepartment: `${ENV.ADMIN_URL}/department/addDepartment.do`,
         },
         education:{
             queryPopularScienceCategoryList: `${ENV.ADMIN_URL}/department/queryPopularScienceCategoryList.do`,

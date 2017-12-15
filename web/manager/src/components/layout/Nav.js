@@ -51,7 +51,6 @@ class Nav extends React.Component {
     }
 
     getMenus = () => {
-        console.log(this.props.isShowTitle)
         let menuNode = 
             menuList.map((levelone,index) => {
                 if(!levelone.children){

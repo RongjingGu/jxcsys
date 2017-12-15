@@ -1,7 +1,7 @@
 export const menuList = [
     {
         name:"科室首页",
-        icon:'icon-hujichaxunxitong',
+        icon:'icon-shouye',
         children:[
             {
                 name:"最新动态",
@@ -37,7 +37,7 @@ export const menuList = [
     },
     {
         name:"科普宣教",
-        icon:'icon-shezhi',
+        icon:'icon-kepu',
         children:[
             {
                 name:"分类管理",
@@ -51,22 +51,22 @@ export const menuList = [
     },
     {
         name:"问题库",
-        icon:'icon-tiwen',
+        icon:'icon-biaoqian',
         path:"#/question"
     },
     {
         name:"咨询历史",
-        icon:'icon-zixun',
+        icon:'icon-jian',
         path:"#/consulhistory"
     },
     {
         name:"热门咨询",
-        icon:'icon-zixun2',
+        icon:'icon-remen',
         path:"#/consulhot"
     },
     {
         name:"用户管理",
-        icon:'icon-geren',
+        icon:'icon-guanli',
         children:[
             {
                 name:"患者",
@@ -84,17 +84,17 @@ export const menuList = [
     },
     {
         name:"服务记录",
-        icon:'icon-nianling',
+        icon:'icon-jilu',
         path:"#/serive"
     },
     {
         name:"咨询排班",
-        icon:'icon-kefu',
+        icon:'icon-zhibananpai',
         path:"#/arrangement"
     },
     {
         name:"科研库权限",
-        icon:'icon-iconfontkeyan1',
+        icon:'icon-quanxian',
         path:"#/auth"
     }
 ]

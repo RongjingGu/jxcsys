@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import $ from '../../common/AjaxRequest';
 import { Form, Input, Modal, Button, Select, message,Cascader} from 'antd';
 import API_URL from '../../common/url';
+import { config } from './config';
 
 class SelectCitys extends React.Component {
     constructor(props) {
@@ -42,6 +43,8 @@ class SelectCitys extends React.Component {
 
 
   onChange = (value, selectedOptions) => {
+      console.log(value)
+
     if(value[0]){
         this.props.ChangeSelectprovinces ? this.props.ChangeSelectprovinces(value[0],selectedOptions[0]) : null
     }
@@ -49,7 +52,7 @@ class SelectCitys extends React.Component {
         this.props.ChangeSelect ? this.props.ChangeSelect(value[1],selectedOptions[1]) :null
         console.log(value[1],selectedOptions[1])
         this.setState({
-            value:value[1]
+            value:selectedOptions[1]
         },()=>{
             const onChange = this.props.onChange;
             if (onChange) {
@@ -58,7 +61,15 @@ class SelectCitys extends React.Component {
         })
     }
     if(!value.length){
-        this.props.clear ? this.props.clear() : null
+        // this.props.clear ? this.props.clear() : null
+        this.setState({
+            value:{value:'',label:''}
+        },()=>{
+            const onChange = this.props.onChange;
+            if (onChange) {
+              onChange(Object.assign({}, this.state.value));
+            }
+        })
     }
   }
 
@@ -107,7 +118,8 @@ class SelectCitys extends React.Component {
   render() {
     const { provinces, inputValue } = this.state;
     return (
-      <Cascader        
+      <Cascader
+        allowClear
         placeholder = { this.props.placeholder || "请选择" }
         options={provinces}
         loadData={this.loadData}

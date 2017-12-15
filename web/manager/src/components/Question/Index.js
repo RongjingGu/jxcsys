@@ -124,12 +124,11 @@ class FormBox extends React.Component {
                 // }],
               })(
                 <span style={{display:'inline-block'}}>
-                  <Input style={{marginRight:1,width:90}} />
+                  <Input style={{width:90,background:'#eee',marginBottom:10}} size='large'/>
                   {keys.length > 1 ? (
-                    <Icon
-                      className="dynamic-delete-button"
-                      type="close-square"
-                      style={{color:'red',fontSize:26,position: 'relative',top:6}}
+                    <i
+                      className="iconfont icon-cha"
+                      style={{color:'blue',fontSize:22,position: 'relative',top:-8,right:16,cursor:'pointer'}}
                       disabled={keys.length === 1}
                       onClick={() => this.remove(k)}
                     />
@@ -160,15 +159,15 @@ class FormBox extends React.Component {
                 {...formItemLayout}
                 label="关键词"
               >
-                <Button type="primary" onClick={this.add} style={{ width: '60%'}}>
-                  <Icon type="plus" /> 添加关键词
+                <Button type="primary" onClick={this.add} style={{ width: '30%'}}>
+                  <Icon type="plus" /> 添加
                 </Button>
               </FormItem>
               <FormItem
                 {...submitFormLayout}
                 label=""
               >
-                {formItems}
+                <div style={{width:'154%'}}>{formItems}</div>
               </FormItem>              
               <FormItem
                 {...formItemLayout}
@@ -210,7 +209,7 @@ class SearchForm extends Component {
                 )}
                 </FormItem>
                 <FormItem label="关键字">
-                {getFieldDecorator('params')(
+                {getFieldDecorator('keyword')(
                     <Input placeholder="请输入关键字" />
                 )}
                 </FormItem>
@@ -439,7 +438,7 @@ state = {
         data: {
             offset: 1,
             limit: 1,
-            lastTendencyId:id,
+            questionStoreId:id,
         },
         dataType: 'json',
         doneResult: data => {
@@ -465,7 +464,7 @@ state = {
         data: {
             offset: 1,
             limit: 1,
-            lastTendencyId:id,
+            questionStoreId:id,
         },
         dataType: 'json',
         doneResult: data => {
@@ -499,6 +498,15 @@ state = {
     }    
     callback && callback()
     }
+    
+    getKeywods=(list)=>{
+      let string='';
+      list.map(d=>{
+        string+=d.keyword+";"
+      });
+      return string;
+    }
+
 
 
   render() {
@@ -514,11 +522,11 @@ state = {
       },
       {
         title: '关键字',
-        dataIndex: 'params',
+        dataIndex: 'keywords',
       },
       {
         title: '创建时间',
-        dataIndex: 'createTimeString',
+        dataIndex: 'createTime',
         sorter: true,
       },
      
@@ -541,6 +549,7 @@ state = {
         let list = {
             index: ((pagination.current - 1) || 0) * pagination.pageSize + i + 1,
             id:d.questionStoreId,
+            keywords:this.getKeywods(d.questionStoreKeywordList),
             ...d,
         }
         lists.push(list)

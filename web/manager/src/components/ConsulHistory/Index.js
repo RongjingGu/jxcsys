@@ -5,7 +5,6 @@ import API_URL from '../../common/url';
 import { Row, Col, Popconfirm,  Card,Table, Form, Input, Select, Icon, Button, Dropdown, Menu, InputNumber, DatePicker, Modal, message, Upload, notification  } from 'antd';
 import Editor from '../common/Editor';
 import {config,uploadser} from '../common/config';
-import SortList from '../common/SortList';
 
 const FormItem = Form.Item;
 const { Option } = Select;
@@ -28,7 +27,8 @@ class FormBox extends React.Component {
       }
     
     handleChange = ({ fileList }) => {
-      if(fileList.status=="error"){
+      console.log(fileList)
+      if(fileList.status=="error" ){
         message.warn("图片上传出错了，请重试！")
         fileList = []
       }
@@ -52,16 +52,28 @@ class FormBox extends React.Component {
     
     componentDidMount(){
       const  { getFieldValue} = this.props.form;
-      const imgName= getFieldValue('mainImgName')
-      const fileList = getFieldValue('mainImgName') ? [{
+      const imgUrl= getFieldValue('mainImgUrl')
+      const fileList = getFieldValue('mainImgUrl') ? [{
         uid: -1,
         name: 'xxx.png',
         status: 'done',
-        url: `http://${imgName}`
+        url: `http://${imgUrl}`
       }]: []
       this.setState({
         fileList
       })
+    }
+
+    normFile = (rule, value, callback) => {
+      console.log(typeof value)
+      if(typeof value =='string'){
+          callback();
+          return;
+      }else if( value && value.fileList.length){
+        callback();
+        return;
+      }
+      callback('请添加图片');
     }
 
     render(){
@@ -97,16 +109,62 @@ class FormBox extends React.Component {
             >
               <FormItem
                 {...formItemLayout}
-                label="分类名称"
+                label="动态标题"
               >
-                {getFieldDecorator('categoryName', {
+                {getFieldDecorator('lastTendencyTitle', {
                   rules: [{
-                    required: true, message: '请输入分类名称',
+                    required: true, message: '请输入标题',
                   }],
                 })(
-                  <Input placeholder="请输入分类名称" />
+                  <Input placeholder="请输入标题" />
                 )}
-              </FormItem>              
+              </FormItem>
+              <FormItem
+                {...formItemLayout}
+                label="动态主图"
+              >
+                {getFieldDecorator('mainImgName', {
+                  rules: [{
+                    required: true, message: '请添加图片',
+                    validator: this.normFile,
+                  }],
+                })(
+                  <Upload
+                    action={uploadser}
+                    listType="picture-card"
+                    fileList={fileList}
+                    onPreview={this.handlePreview}
+                    onChange={this.handleChange}
+                  >
+                    {fileList.length >= 1 ? null : uploadButton}
+                  </Upload>              
+                )}
+              </FormItem>
+              <FormItem
+                {...formItemLayout}
+                label="发布时间"
+              >
+                {getFieldDecorator('publishDay', {
+                  rules: [{
+                    required: true, message: '请选择时间',
+                  }],
+                })(
+                  <DatePicker />
+                )}
+              </FormItem>
+              <FormItem
+                {...formItemLayout}
+                label="内容"
+              >
+                {getFieldDecorator('htmlText', {
+                  rules: [{
+                    required: true,
+                    validator: this.validateHtml,
+                  }],
+                })(
+                  <Editor style={{width:460}}/>
+                )}
+              </FormItem>
               <FormItem {...submitFormLayout} style={{ marginTop: 32 }}>
                 <Button type="primary" htmlType="submit" loading={submitting}>
                   提交
@@ -128,9 +186,9 @@ class SearchForm extends Component {
         const { getFieldDecorator } = this.props.form;
         return (
             <Form onSubmit={this.props.handleSearch} layout="inline">
-                <FormItem label="分类名称">
-                {getFieldDecorator('categoryName')(
-                    <Input placeholder="请输入分类名称" />
+                <FormItem label="动态标题">
+                {getFieldDecorator('lastTendencyTitle')(
+                    <Input placeholder="请输入标题" />
                 )}
                 </FormItem>
                 <Button icon="search" type="primary" htmlType="submit" style={{float:'right'}}>查询</Button>
@@ -139,7 +197,7 @@ class SearchForm extends Component {
     }
 }
 
-export default class EducationClass extends Component {
+export default class Index extends Component {
 state = {
     loading:false,
     pagination:{
@@ -155,7 +213,6 @@ state = {
     isEdit:false,
     selectedRowKeys: [],
     totalCallNo: 0,
-    sortModalVisible:false
   };
 
   loadListData = (params) => {
@@ -165,7 +222,7 @@ state = {
     });
     const options ={
         method: 'POST',
-        url: API_URL.education.queryPopularScienceCategoryList,
+        url: API_URL.index.queryLastTendencyList,
         data: {
             offset: 1,
             limit: pagination.pageSize,
@@ -271,7 +328,7 @@ state = {
   handleSearch = (e) => {
     e.preventDefault();
     this.searchFormRef.validateFields((err, fieldsValue) => {
-      if (err) return;
+      if (err) return;      
       this.loadListData(fieldsValue)
       this.setState({
         searchFormValues: fieldsValue,
@@ -290,15 +347,15 @@ state = {
   renderSearchForm() {
     const { selectedRows, searchFormValues } = this.state;
     const mapPropsToFields = () => ({ 
-            categoryName:{value:searchFormValues.categoryName},
+            lastTendencyTitle:{value:searchFormValues.lastTendencyTitle},
           })
     SearchForm = Form.create({mapPropsToFields})(SearchForm)    
     return (
         <Row gutter={2}>
-            <Col md={18} sm={24} >
+            <Col md={22} sm={24} >
                 <SearchForm handleSearch={this.handleSearch} ref = { el => {this.searchFormRef = el}}/>
             </Col>
-            <Col md={6} sm={8} style={{textAlign:'right'}}>            
+            <Col md={2} sm={8} style={{textAlign:'right'}}>            
             {
                 selectedRows.length > 0 &&
                 <Popconfirm title="确定要删除吗？" onConfirm={()=>{this.del(this.state.selectedRows)}} okText="是" cancelText="否">
@@ -306,34 +363,20 @@ state = {
                 </Popconfirm>
             }            
                 <Button icon="plus" type="primary" onClick={()=>{this.changeModalView('modalVisible','open','new')}}>新建</Button>
-                <Button style={{marginLeft:10}} icon="bar-chart" type="primary" onClick={this.sort}>排序</Button>
             </Col>
         </Row>
     );
   }
 
 
-     /**
-     * 排序调整
-     */
-    sort = () => {
-        const {listData} = this.state;
-        const sortList = [];
-        listData.map(item => {
-            // if (item.moduleDefineName != '录入者'){
-            //     sortList.push({
-            //         key: item.moduleDefineCode,
-            //         name: item.moduleDefineName,
-            //     });
-            // }
-        });
-        this.sortListRef.show(sortList);
-    }
-
   handleSubmit = (e) => {
     e.preventDefault();
     this.formboxref.validateFieldsAndScroll((err, values) => {      
-      if (!err) {             
+      if (!err) {
+        console.log(values)
+        values.publishDay = moment(values.publishDay).format(dayFormat)
+        values.mainImgName = values.mainImgName.file ? values.mainImgName.file.response.data[0].fileName : values.mainImgName
+        values.htmlText = values.htmlText.editorContent
         this.save(values)
       }
     });
@@ -343,9 +386,10 @@ state = {
     const {isEdit,editId}=this.state
     const options ={
         method: 'POST',
-        url: isEdit ? API_URL.education.modifyPopularScienceCategory :  API_URL.education.addPopularScienceCategory,
+        url: isEdit ? API_URL.index.modifyLastTendency :  API_URL.index.addLastTendency,
         data: {
             ...params,
+            lastTendencyId:isEdit ? editId : null,
         },
         dataType: 'json',
         doneResult: data => {
@@ -367,7 +411,7 @@ state = {
   edit=(id)=>{
     const options ={
         method: 'POST',
-        url: API_URL.education.queryPopularScienceCategoryList,
+        url: API_URL.index.queryLastTendencyList,
         data: {
             offset: 1,
             limit: 1,
@@ -393,11 +437,11 @@ state = {
   del = (id) => {
     const options ={
         method: 'POST',
-        url: API_URL.education.deletePopularScienceCategory,
+        url: API_URL.index.deleteLastTendency,
         data: {
             offset: 1,
             limit: 1,
-            popularScienceCategoryId:id,
+            lastTendencyId:id,
         },
         dataType: 'json',
         doneResult: data => {
@@ -434,16 +478,29 @@ state = {
 
 
   render() {
-    const {loading, listData, detail, selectedRows, addInputValue, isEdit, selectedRowKeys, totalCallNo, modalVisible, sortModalVisible, pagination } = this.state;
+    const {loading, listData, detail, selectedRows, addInputValue, isEdit, selectedRowKeys, totalCallNo, modalVisible, pagination } = this.state;
     const columns = [
       {
         title: '序号',
         dataIndex: 'index',
       },
       {
-        title: '分类名称',
-        dataIndex: 'categoryName',
+        title: '动态标题',
+        dataIndex: 'lastTendencyTitle',
       },
+      {
+        title: '创建时间',
+        dataIndex: 'createTimeString',
+        sorter: true,
+      },      
+      {
+        title: '发布时间',
+        dataIndex: 'publishDay', 
+        sorter: true,
+        render: (text,record,index) => (
+          moment(record.publishDay).format("YY.MM.DD")
+        )
+      },      
       {
         title: '操作',
         render: (text,record,index) => (
@@ -462,7 +519,7 @@ state = {
     listData.map((d,i)=>{
         let list = {
             index: ((pagination.current - 1) || 0) * pagination.pageSize + i + 1,
-            id:d.popularScienceCategoryId,
+            id:d.lastTendencyId,
             ...d,
         }
         lists.push(list)
@@ -482,7 +539,11 @@ state = {
     const mapPropsToFields = () => (        
       isEdit ?        
         { 
-            categoryName:{value:detail.categoryName},
+            lastTendencyTitle:{value:detail.lastTendencyTitle},
+            mainImgName:{value:detail.mainImgName},
+            mainImgUrl:{value:detail.mainImgUrl},
+            publishDay:{value:moment(detail.publishDay)},
+            htmlText:{value:{editorContent:detail.htmlText}},
         } : null
       ) 
     FormBox=Form.create({mapPropsToFields})(FormBox)
@@ -511,13 +572,6 @@ state = {
             >
                <FormBox ref={el=>{this.formboxref = el}} closeModalView={this.changeModalView} handleSubmit={this.handleSubmit}/>
             </Modal>
-            <SortList ref={el => { this.sortListRef = el; }}
-                            // reload={this.loadData}
-                            sortUrl={API_URL.education.sortPopularScienceCategory}
-                            title={"分类排序"}
-                            // data={{typeName,}}
-                            data={{}}
-            />
       </div>
     );
   }

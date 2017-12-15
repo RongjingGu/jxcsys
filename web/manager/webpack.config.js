@@ -10,7 +10,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 // const outPath = path.resolve(__dirname, '../../smo/deploys/saml/src/main/webapp');
 
 // 模拟登陆发布页面
-const outPath = path.resolve(__dirname, '../../jxc/deploys/manager/src/main/webapp');
+const outPath = path.resolve(__dirname, '../../hdwx/deploys/manager/src/main/webapp');
 
 
 module.exports = {

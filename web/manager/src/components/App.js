@@ -1,5 +1,5 @@
 import React from 'react';
-import { Layout, Menu, Icon, Breadcrumb, Dropdown, Avatar } from 'antd';
+import { Layout, Menu, Icon, Breadcrumb, Dropdown, Avatar, Col,Row } from 'antd';
 //import Header from './layout/Header';
 //import Footer from './layout/Footer';
 import Nav from './layout/Nav';
@@ -123,17 +123,22 @@ class App extends React.Component {
                   type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'}
                   onClick={this.toggle}
                 />
-                <Dropdown overlay={menu}>
+                {/* <Dropdown overlay={menu}> */}
+                {/* <Dropdown> */}
+                <span className="action account"><a href="javascript:;"  onClick={()=>{}}><i className="iconfont icon-quit" style={{fontSize:22}} /></a></span>
+                <span className="action account"><a href="javascript:;"  onClick={()=>{}}><i className="iconfont icon-shezhi" style={{fontSize:22}} /></a></span>
+                
                   <span className="action account">
                     <Avatar size="small" className="avatar" />
                     你好，管理员
                   </span>
-                </Dropdown>
+                  
+                {/* </Dropdown> */}
               </Header>
               <Breadcrumb style={{padding:16,borderTop:'2px solid #eee'}}>
                 {breadList}
               </Breadcrumb>
-              <Content style={{ margin: '24px 16px', padding: 24, background: '#fff', minHeight: 280 }}>
+              <Content style={{ margin: '24px 16px 0 16px', padding: 24, background: '#fff'}}>
               { this.props.children }
               </Content>
               <Footer style={{ textAlign: 'center' }}>

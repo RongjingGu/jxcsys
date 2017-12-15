@@ -58,7 +58,7 @@ class FormBox extends React.Component {
         uid: -1,
         name: 'xxx.png',
         status: 'done',
-        url: `http://${imgUrl}`
+        url: imgUrl
       }]: []
       this.setState({
         fileList
@@ -394,7 +394,10 @@ state = {
     this.formboxref.validateFieldsAndScroll((err, values) => {      
       if (!err) {
         // values.mainImgName = values.mainImgName.file.name 
-        values.mainImgName = values.mainImgName.file.response.data[0].fileName
+        if(values.mainImgName.file != null && values.mainImgName.file != undefined){
+          values.mainImgName = values.mainImgName.file.response.data[0].fileName
+        }
+        
         this.save(values)
       }
     });
@@ -404,7 +407,7 @@ state = {
     const {isEdit,editId}=this.state
     const options ={
         method: 'POST',
-        url: isEdit ? API_URL.index.modifCarrouselImg :  API_URL.index.addCarrouselImg,
+        url: isEdit ? API_URL.index.modifyCarrouselImg :  API_URL.index.addCarrouselImg,
         data: {
             ...params,
             carrouselImgId:isEdit ? editId : null,

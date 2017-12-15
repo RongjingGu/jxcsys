@@ -60,19 +60,20 @@ class FormBox extends React.Component {
     
     componentDidMount(){
       const  { getFieldValue} = this.props.form;
-      const departmentMainImg= getFieldValue('departmentMainImg')
-      const departmentLogeImg= getFieldValue('departmentLogeImg')
+      const departmentMainImg= getFieldValue('departmentMainImgUrl')
+      const departmentLogoImg= getFieldValue('departmentLogoImgUrl')
+      console.log(departmentLogoImg)
       const fileList = getFieldValue('departmentMainImg') ? [{
         uid: -1,
-        name: 'xxx.png',
+        name: 'main.png',
         status: 'done',
-        url: `http://${departmentMainImg}`
+        url: departmentMainImg
       }]: []
-      const fileLogo = getFieldValue('departmentLogeImg') ? [{
-        uid: -1,
-        name: 'xxx.png',
+      const fileLogo = getFieldValue('departmentLogoImg') ? [{
+        uid: -2,
+        name: 'logo.png',
         status: 'done',
-        url: `http://${departmentLogeImg}`
+        url: departmentLogoImg
       }]: []
       this.setState({
         fileList,
@@ -94,11 +95,11 @@ class FormBox extends React.Component {
     render(){
         const { getFieldDecorator, getFieldsValue, setFieldsValue} = this.props.form;
         const { previewVisible, previewImage, submitting, fileList, fileLogo} = this.state;
+        console.log(fileList, fileLogo)
         const uploadButton = (
-          <div>
-            <Icon type="plus" />
-            <div className="ant-upload-text">上传图片</div>
-          </div>
+          <Button type="primary" size='large'>
+            <Icon type="plus" />选择图片
+          </Button>
         );
         const formItemLayout = {
           labelCol: {
@@ -138,7 +139,7 @@ class FormBox extends React.Component {
                 {...formItemLayout}
                 label="Logo图"
               >
-                {getFieldDecorator('departmentLogeImg', {
+                {getFieldDecorator('departmentLogoImg', {
                   rules: [{
                     required: true, message: '请添加图片',
                     validator: this.normFile,
@@ -146,7 +147,7 @@ class FormBox extends React.Component {
                 })(
                   <Upload
                     action={uploadser}
-                    listType="picture-card"
+                    listType="picture"
                     fileList={fileLogo}
                     onPreview={this.handlePreview}
                     onChange={this.handleChange}
@@ -167,7 +168,7 @@ class FormBox extends React.Component {
                 })(
                   <Upload
                     action={uploadser}
-                    listType="picture-card"
+                    listType="picture"
                     fileList={fileList}
                     onPreview={this.handlePreview}
                     onChange={this.handleChange2}
@@ -232,7 +233,7 @@ state = {
     });
     const options ={
         method: 'POST',
-        url: API_URL.index.queryDepartmentById,
+        url: API_URL.index.queryDepartment,
         data: {
             offset: 1,
             limit: pagination.pageSize,
@@ -399,8 +400,9 @@ state = {
     e.preventDefault();
     this.formboxref.validateFieldsAndScroll((err, values) => {      
       if (!err) {
-        values.departmentLogeImg = values.departmentLogeImg.file.response.data[0].fileName
-        values.departmentMainImg = values.departmentMainImg.file.response.data[0].fileName
+        values.departmentName = values.departmentName;
+        values.departmentLogoImg = values.departmentLogoImg.file ? values.departmentLogoImg.file.response.data[0].fileName : values.departmentLogoImg
+        values.departmentMainImg = values.departmentMainImg.file ? values.departmentMainImg.file.response.data[0].fileName : values.departmentMainImg
         values.htmlText = Object.keys(values.htmlText).length && values.htmlText.editorContent
         this.save(values)
       }
@@ -431,16 +433,16 @@ state = {
     $.sendRequest(options)
   }
 
-  edit=(id)=>{
+  edit=()=>{
     const options ={
         method: 'POST',
-        url: API_URL.index.queryDepartmentById,
+        url: API_URL.index.queryDepartment,
         data: {
         },
         dataType: 'json',
         doneResult: data => {
             if (!data.error) {
-                const detail = data.datas[0] || data.data[0];
+                const detail = data.department;
                 this.setState({
                     detail,
                 });
@@ -501,9 +503,11 @@ state = {
     
     const mapPropsToFields = () => (
         { 
-            departmentName:{value:detail.departmentName},
-            departmentLogeImg:{value:detail.departmentLogeImg},
-            departmentMainImg:{value:moment(detail.departmentMainImg)},
+            departmentName:{value:detail.departmentLocalName},
+            departmentLogoImg:{value:detail.logoImgUuid},
+            departmentMainImg:{value:detail.mainImgUuid},
+            departmentLogoImgUrl:{value:detail.logoImgUuidUrl},
+            departmentMainImgUrl:{value:detail.mainImgUuidUrl},
             htmlText:{value:{editorContent:detail.htmlText}},
         } 
       ) 

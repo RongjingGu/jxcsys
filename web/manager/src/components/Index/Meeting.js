@@ -6,7 +6,6 @@ import { Row, Col, Popconfirm,  Card,Table, Form, Input, Select, Icon, Button, D
 import Editor from '../common/Editor';
 import SelectCitys from '../common/SelectCitys';
 import {config,uploadser} from '../common/config';
-import styles from './style.less';
 
 const FormItem = Form.Item;
 const { MonthPicker, RangePicker } = DatePicker;
@@ -67,7 +66,6 @@ class FormBox extends React.Component {
     }
 
     normFile = (rule, value, callback) => {
-      console.log(typeof value)
       if(typeof value =='string'){
           callback();
           return;
@@ -81,8 +79,8 @@ class FormBox extends React.Component {
     render(){
         const { getFieldDecorator, getFieldValue, setFieldsValue} = this.props.form;
         const { previewVisible, previewImage, submitting, fileList} = this.state;
-        const location = getFieldValue("location")
-        console.log(location)
+        const locationId = getFieldValue("locationId")
+        const location = locationId && locationId.label
         const uploadButton = (
           <div>
             <Icon type="plus" />
@@ -165,7 +163,8 @@ class FormBox extends React.Component {
                     required: true, message: '请选择地点',
                   }],
                 })(
-                    <SelectCitys style={{width:150}} placeholder={location}
+                    <SelectCitys style={{width:150}} placeholder={location} 
+                    // defaultValue={locationId}
                     // ChangeSelectprovinces ={this.ChangeSelectprovinces}
                     // ChangeSelect = {this.handleChangeSelect.bind(this, 'workCityId')}
                     />
@@ -199,7 +198,9 @@ class FormBox extends React.Component {
 
 class SearchForm extends Component {
     render(){
-        const { getFieldDecorator } = this.props.form;
+        const { getFieldDecorator, getFieldValue } = this.props.form;
+        const locationId = getFieldValue('locationId')
+        const regionName = locationId && locationId.label        
         return (
             <Form onSubmit={this.props.handleSearch} layout="inline">
                 <FormItem label="会议标题">
@@ -214,7 +215,7 @@ class SearchForm extends Component {
                 </FormItem>
                 <FormItem label="会议地点">
                 {getFieldDecorator('locationId')(
-                    <SelectCitys />
+                    <SelectCitys placeholder={regionName}/>
                 )}
                 </FormItem>
                 <Button icon="search" type="primary" htmlType="submit" style={{float:'right'}}>查询</Button>
@@ -370,12 +371,12 @@ state = {
     e.preventDefault();
     this.searchFormRef.validateFields((err, fieldsValue) => {
       if (err) return;
-      
       const rangeTimeValue = fieldsValue['meetingTime'] || null;
       fieldsValue.beginTime = rangeTimeValue && Object.keys(rangeTimeValue).length>0 ? rangeTimeValue[0].format('YYYY-MM-DD HH:mm:ss') :null
       fieldsValue.endTime = rangeTimeValue && Object.keys(rangeTimeValue).length>0 ? rangeTimeValue[1].format('YYYY-MM-DD HH:mm:ss') :null
-      fieldsValue.regionId =fieldsValue.locationId && fieldsValue.locationId[1]
-    //   fieldsValue.meetingTime = null
+      fieldsValue.regionId = fieldsValue.locationId && fieldsValue.locationId.value
+      fieldsValue.regionName= fieldsValue.locationId && fieldsValue.locationId.label
+      fieldsValue.locationId = null
       this.setState({
         searchFormValues: fieldsValue,
       });
@@ -395,7 +396,8 @@ state = {
     const { selectedRows, searchFormValues } = this.state;
     const mapPropsToFields = () => ({ 
         meetingTitle:{value:searchFormValues.meetingTitle},
-        locationId:{value:searchFormValues.locationId},
+        regionName:{value:searchFormValues.regionName},
+        locationId:{value:{value:searchFormValues.regionId,label:searchFormValues.regionName}},
         // meetingTime:{value: searchFormValues.beginTime && [moment(searchFormValues.beginTime),moment(searchFormValues.endTime)]},
         meetingTime:{value: searchFormValues.meetingTime},
           })
@@ -421,16 +423,15 @@ state = {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    this.formboxref.validateFieldsAndScroll((err, values) => {      
-        console.log(values)
+    this.formboxref.validateFieldsAndScroll((err, values) => { 
         const rangeTimeValue = values['meetingTime'];
       if (!err) {
-        values.regionId = values.locationId ? values.locationId[1] : null
+        values.regionId = values.locationId ? values.locationId.value : null
         values.mainImgName = values.mainImgName.file ? values.mainImgName.file.response.data[0].fileName : values.mainImgName
         values.beginTime = rangeTimeValue[0].format('YYYY-MM-DD HH:mm:ss')
         values.endTime = rangeTimeValue[1].format('YYYY-MM-DD HH:mm:ss')
         values.htmlText = values.htmlText.editorContent
-        // values.locationId=null
+        values.locationId=null
         values.meetingTime=null
         this.save(values)
       }
@@ -599,8 +600,7 @@ state = {
             meetingTitle:{value:detail.meetingTitle},
             mainImgName:{value:detail.mainImgName},
             mainImgUrl:{value:detail.mainImgUrl},
-            locationId:{value:detail.locationId},
-            location:{value:detail.location},
+            locationId:{value:{value:detail.locationId,label:detail.location}},
             meetingTime:{value:[moment(detail.beginTime),moment(detail.endTime)]},
             htmlText:{value:{editorContent:detail.htmlText}},
         } : null
