@@ -15,10 +15,8 @@
     <modules>
         <module>jxc-main</module>
         <module>jxc-authorizer</module>
-        <module>jxc-settings</module>
         <module>jxc-portal</module>
         <module>jxc-manager</module>
-        <module>jxc-pdmsInterface</module>
     </modules>
     <dependencies>
         <dependency>

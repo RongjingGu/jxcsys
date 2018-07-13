@@ -11,7 +11,7 @@ const TEST = {
 };
 
 const LOC = {
-    ADMIN_URL: 'http://localhost:12003/manager',
+    ADMIN_URL: 'http://localhost:8900',
     SAML_URL: '/front',
     LOGOUT_URL: './',
 };

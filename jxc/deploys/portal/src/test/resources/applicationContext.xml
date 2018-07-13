@@ -74,15 +74,15 @@
 
 	<!-- <mvc:default-servlet-handler/> -->
 	<!-- <cache:annotation-driven key-generator="keyGeneratorService"/> -->
-	<mvc:interceptors>
-		<mvc:interceptor>
-			<mvc:mapping path="/**" />
-			<bean class="com.sweetw.idata.commons.interceptor.CustomInterceptor">
-				<property name="ManagementAudit" ref="portalAuditImpl"/>
-			</bean>
-		</mvc:interceptor>
-	</mvc:interceptors>
-	<bean id = "portalAuditImpl"  class="com.unimedsci.ydata.jxc.authorizer.hdwxManagementAudit"/>
+	<!--<mvc:interceptors>-->
+		<!--<mvc:interceptor>-->
+			<!--<mvc:mapping path="/**" />-->
+			<!--<bean class="com.sweetw.idata.commons.interceptor.CustomInterceptor">-->
+				<!--<property name="ManagementAudit" ref="portalAuditImpl"/>-->
+			<!--</bean>-->
+		<!--</mvc:interceptor>-->
+	<!--</mvc:interceptors>-->
+	<!--<bean id = "portalAuditImpl"  class="com.unimedsci.ydata.jxc.authorizer.hdwxManagementAudit"/>-->
 
 
 	<!-- spring自己的换管理器，这里定义了两个缓存位置名称 ，既注解中的value -->

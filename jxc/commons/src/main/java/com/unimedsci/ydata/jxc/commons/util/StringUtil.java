@@ -4,6 +4,7 @@ package com.unimedsci.ydata.jxc.commons.util;
 import com.alibaba.fastjson.JSONObject;
 import com.github.miemiedev.mybatis.paginator.domain.Order;
 import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
+import org.omg.CORBA.PUBLIC_MEMBER;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 
 /**
@@ -475,13 +477,25 @@ public final class StringUtil {
         }
     }
 
+    public static String digistPassword(String password) throws Exception{
+        MessageDigest digest = MessageDigest.getInstance("SHA-1");
+        digest.update(password.getBytes("UTF-8"));
+        byte[] result = digest.digest();
+        return new String(result);
+    }
+
     /**
      * @param args
      */
-    public static void main(String[] args) {
-        // TODO Auto-generated method stub
-        System.out.println(toCamelCase("wl_fn", "_"));
-        System.out.println(camelCaseToString("deviceType", "_"));
+    public static void main(String[] args) throws Exception{
+        System.out.println(digistPassword("123456"));
+
+
+    }
+
+    public static Pattern  getLike(String username){
+        return Pattern.compile(".*" + username + ".*", Pattern.CASE_INSENSITIVE);
+
     }
 
 }

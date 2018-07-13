@@ -24,16 +24,7 @@
             <version>4.12</version>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>com.unimedsci.ydata.jxc</groupId>
-            <artifactId>jxc-settings</artifactId>
-            <version>${global.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.unimedsci.ydata.jxc</groupId>
-            <artifactId>jxc-pdmsInterface</artifactId>
-            <version>${global.version}</version>
-        </dependency>
+
         <dependency>
             <groupId>com.unimedsci.ydata.jxc</groupId>
             <artifactId>jxc-main</artifactId>

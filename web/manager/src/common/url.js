@@ -7,8 +7,8 @@ let API_URL = {};
 if (!STATIC) {
     API_URL = {
         // SMO_PORTAL_URL: ENV.PORTAL_URL,
-        config:{
-            userIsSendEmail: `${ENV.ADMIN_URL}/userInfo/setMailFlag.do`,
+        data:{
+            queryUsers: `${ENV.ADMIN_URL}/data/queryUsers.do`,
             queryUserEmail: `${ENV.ADMIN_URL}/userInfo/getMailFlag.do`,
             logoutUrl: `${ENV.LOGOUT_URL}`,
         },

@@ -10,37 +10,6 @@ const { Option } = Select;
 const getValue = obj => Object.keys(obj).map(key => obj[key]).join(',');
 const dayFormat = 'YYYY-MM-DD'
 
-
-
-class SearchForm extends Component {
-    render(){
-        const { getFieldDecorator } = this.props.form;
-        return (
-            <Form onSubmit={this.props.handleSearch} layout="inline">
-                <FormItem label="姓名">
-                {getFieldDecorator('name')(
-                    <Input placeholder="请输入姓名" />
-                )}
-                </FormItem>
-                <FormItem label="手机号">
-                {getFieldDecorator('mobile')(
-                    <Input placeholder="请输入手机号" />
-                )}
-                </FormItem>
-                <FormItem label="绑定状态">
-                {getFieldDecorator('name')(
-                    <Select allowClear style={{width:120}}>
-                        <Option value="1">已绑定</Option>
-                        <Option value="0">未绑定</Option>
-                    </Select>
-                )}
-                </FormItem>
-                <Button icon="search" type="primary" htmlType="submit" style={{float:'right'}}>查询</Button>
-            </Form>
-        );
-    }
-}
-
 export default class Doctors extends Component {
 state = {
     loading:false,
@@ -66,7 +35,7 @@ state = {
     });
     const options ={
         method: 'POST',
-        url: API_URL.index.queryLastTendencyList,
+        url: API_URL.data.queryUsers,
         data: {
             offset: 1,
             limit: pagination.pageSize,

@@ -182,7 +182,7 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.40</version>
+            <version>5.1.46</version>
         </dependency>
         <dependency>
             <groupId>org.apache.tomcat</groupId>
@@ -247,6 +247,12 @@
             <groupId>com.corundumstudio.socketio</groupId>
             <artifactId>netty-socketio</artifactId>
             <version>1.7.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mongodb</groupId>
+            <artifactId>mongo-java-driver</artifactId>
+            <version>2.14.3</version>
         </dependency>
     </dependencies>
     <repositories>
