@@ -21,16 +21,20 @@ module.exports = {
             test: /\.js?$/,
             exclude: /node_modules/,
             use: [{ loader: 'babel-loader' }],
-        }, {
+        }, 
+        {
             test: /\.less$/,
             use: ExtractTextPlugin.extract({ fallback: 'style-loader', use: ['css-loader', 'less-loader'] }),
-        }, {
+        },
+        {
             test: /\.css$/,
             use: ExtractTextPlugin.extract({ fallback: 'style-loader', use: 'css-loader' }),
-        }, {
+        },
+        {
             test: /\.(jpg|png|gif)$/,
             use: ['file-loader?name=images/[name].[ext]'],
-        }, {
+        }, 
+        {
             test: /\.(eot|woff|woff2|ttf|svg)$/,
             use: ['file-loader?name=fonts/[name].[ext]'],
         }],

@@ -6,12 +6,18 @@ import store from './store';
 import routes from './routes';
 import Login from './Login'
 
+import './style/antd.min.css';
+// import './style/main.less';
+import moment from 'moment';
+import 'moment/locale/zh-cn';
+import 'babel-polyfill';
+
 ReactDOM.render(
     <Provider store={store}>
         <HashRouter>
             <div className="router-index">
             <Route path="/login" component={Login} isLogin={true} />   , 
-            /* <App>
+             {/* <App>
                 
                 {
                     routes.map((route, index) => (
@@ -22,7 +28,7 @@ ReactDOM.render(
                             component={route.render}
                         />))
                 }
-            </App> */
+            </App>  */}
             </div>
          </HashRouter>
      </Provider>,

@@ -69,7 +69,7 @@ public class UserController {
     @RequestMapping(value = "/login", method = {RequestMethod.GET,
             RequestMethod.POST}, headers = "Accept=application/json;charset=utf-8")
     @ResponseBody
-    @login
+//    @login
     public JSONObject login(@RequestParam(value = "username") String username,
                             @RequestParam(value = "password") String passwrod) {
         try {
@@ -86,7 +86,7 @@ public class UserController {
         }
     }
 
-    @RequestMapping(value = "/querySetting", method = {RequestMethod.GET,
+        @RequestMapping(value = "/querySetting", method = {RequestMethod.GET,
             RequestMethod.POST}, headers = "Accept=application/json;charset=utf-8")
     @ResponseBody
     @login
